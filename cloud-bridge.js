@@ -43,54 +43,109 @@
     if (empty) empty.style.display = (items && items.length) ? 'none' : 'block';
   }
 
+  function createMediaActions(item, captionNode, refresh) {
+    const actions = document.createElement('div');
+    actions.className = item.media_type === 'photo' ? 'photo-actions' : 'video-actions';
+
+    const edit = document.createElement('button');
+    edit.type = 'button';
+    edit.className = item.media_type === 'photo' ? 'photo-action-btn edit-caption-btn' : 'add-btn';
+    edit.textContent = '✏️ Editar legenda';
+    edit.onclick = async function () {
+      const next = prompt('Edite a legenda:', item.caption || '');
+      if (next === null) return;
+      try {
+        await window.MemoriesCloud.updateMediaCaption(item.id, next.trim());
+        item.caption = next.trim();
+        captionNode.textContent = item.caption;
+        await refresh();
+      } catch (e) {
+        console.error(e);
+        alert('Não foi possível editar a legenda. Detalhes: ' + (e.message || e));
+      }
+    };
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = item.media_type === 'photo' ? 'photo-action-btn delete-photo-btn' : 'nav-btn';
+    remove.textContent = '🗑️ Excluir';
+    remove.onclick = async function () {
+      if (!confirm('Deseja excluir esta memória? Essa ação não pode ser desfeita.')) return;
+      try {
+        await window.MemoriesCloud.deleteMedia(item.id, item.storage_path);
+        await refresh();
+      } catch (e) {
+        console.error(e);
+        alert('Não foi possível excluir a memória. Detalhes: ' + (e.message || e));
+      }
+    };
+
+    actions.append(edit, remove);
+    return actions;
+  }
+
+  async function refreshMedia() {
+    renderCloudMedia(await window.MemoriesCloud.loadMedia());
+  }
+
   function renderCloudMedia(items) {
     const grid = document.querySelector('.photo-grid');
     const videoPreview = document.getElementById('videoPreview');
     if (!grid) return;
 
-    const existingCloud = grid.querySelectorAll('.cloud-memory-card');
-    existingCloud.forEach(function (node) { node.remove(); });
+    grid.querySelectorAll('.cloud-memory-card').forEach(function (node) { node.remove(); });
 
     (items || []).forEach(function (item) {
       if (!item.file_url || item.media_type !== 'photo') return;
+
       const article = document.createElement('article');
       article.className = 'photo-card cloud-memory-card';
+
       const img = document.createElement('img');
       img.alt = item.caption || 'Foto';
       img.src = item.file_url;
       img.loading = 'lazy';
       img.tabIndex = 0;
-      img.onclick = function () { if (typeof abrirFoto === 'function') abrirFoto(img.src); };
+      img.onclick = function () {
+        if (typeof abrirFoto === 'function') abrirFoto(img.src);
+      };
       article.appendChild(img);
+
       const cap = document.createElement('div');
       cap.className = 'photo-caption';
       cap.textContent = item.caption || '';
       article.appendChild(cap);
+
+      article.appendChild(createMediaActions(item, cap, refreshMedia));
       grid.appendChild(article);
     });
 
     if (videoPreview) {
-      const videos = (items || []).filter(function (x) { return x.media_type === 'video' && x.file_url; });
+      const videos = (items || []).filter(function (x) {
+        return x.media_type === 'video' && x.file_url;
+      });
+
       videoPreview.innerHTML = '';
-      if (videos.length) {
-        videos.forEach(function (item) {
-          const wrap = document.createElement('div');
-          wrap.style.marginTop = '12px';
-          const video = document.createElement('video');
-          video.controls = true;
-          video.playsInline = true;
-          video.preload = 'metadata';
-          video.src = item.file_url;
-          wrap.appendChild(video);
-          if (item.caption) {
-            const cap = document.createElement('div');
-            cap.className = 'photo-caption';
-            cap.textContent = item.caption;
-            wrap.appendChild(cap);
-          }
-          videoPreview.appendChild(wrap);
-        });
-      }
+
+      videos.forEach(function (item) {
+        const wrap = document.createElement('div');
+        wrap.className = 'video-card';
+
+        const video = document.createElement('video');
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.src = item.file_url;
+        wrap.appendChild(video);
+
+        const cap = document.createElement('div');
+        cap.className = 'photo-caption';
+        cap.textContent = item.caption || '';
+        wrap.appendChild(cap);
+
+        wrap.appendChild(createMediaActions(item, cap, refreshMedia));
+        videoPreview.appendChild(wrap);
+      });
     }
   }
 
