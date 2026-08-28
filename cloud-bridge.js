@@ -90,7 +90,18 @@
 
   function renderCloudMedia(items) {
     const grid = document.querySelector('.photo-grid');
-    const videoPreview = document.getElementById('videoPreview');
+    let videoPreview = document.getElementById('videoPreview');
+
+    if (!videoPreview) {
+      const videoInput = document.getElementById('videoInput');
+      const videoHost = videoInput ? (videoInput.parentElement || videoInput.closest('.memory-section')) : null;
+      if (videoHost) {
+        videoPreview = document.createElement('div');
+        videoPreview.id = 'videoPreview';
+        videoHost.appendChild(videoPreview);
+      }
+    }
+
     if (!grid) return;
 
     grid.querySelectorAll('.cloud-memory-card').forEach(function (node) { node.remove(); });
