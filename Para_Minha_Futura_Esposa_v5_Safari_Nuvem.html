@@ -2,423 +2,3815 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"/>
+
+<meta
+    content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"
+    name="viewport"
+/>
+
 <title>Para Minha Futura Esposa</title>
+
+<link
+    href="https://fonts.googleapis.com"
+    rel="preconnect"
+/>
+
+<link
+    crossorigin=""
+    href="https://fonts.gstatic.com"
+    rel="preconnect"
+/>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+/>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:linear-gradient(135deg,#ff8fb1,#ff5e8a,#c44569);color:#fff;overflow:hidden;transition:1s;height:100vh;display:flex;align-items:center;justify-content:center}
-body.estrelado{background:linear-gradient(135deg,#020024,#090979,#000)}
-button{padding:12px 20px;border:0;border-radius:12px;cursor:pointer;background:rgba(255,255,255,.92);color:#7b2341;font-weight:700;transition:.2s;box-shadow:0 4px 12px rgba(0,0,0,.1);margin-bottom:10px}
-button:hover{transform:translateY(-1px) scale(1.02)}
-.theme-btn{position:fixed;top:14px;right:14px;width:42px;height:42px;padding:0;border-radius:50%;z-index:1000;font-size:1.25rem}
-.book-container{width:min(940px,94%);height:min(680px,85vh);position:relative;z-index:2;display:flex;flex-direction:column}
-.pages-wrapper{flex:1;position:relative;overflow:hidden;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.18)}
-.page{position:absolute;inset:0;padding:40px 30px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;opacity:0;pointer-events:none;transition:.5s;transform:translateX(40px);overflow-y:auto}
-.page.active{opacity:1;pointer-events:auto;transform:translateX(0)}
-.hero h1{font-size:clamp(3.5rem,8vw,5.5rem);line-height:1.05;cursor:pointer;margin-bottom:10px}
-.frase{max-width:700px;font-size:clamp(1.1rem,2.5vw,1.35rem);line-height:1.7;font-style:italic}
-.story-box{width:100%;max-width:800px}.story{font-size:clamp(.95rem,2.2vw,1.08rem);line-height:1.8;white-space:pre-line;text-align:left}
-#carta{white-space:pre-line;line-height:1.8;font-size:clamp(.95rem,2.2vw,1.05rem);max-width:650px}
-#motivo{margin-top:15px;font-size:1.2rem;line-height:1.65;min-height:32px;font-weight:600}
-.hidden{display:none}
-.final-quote{font-size:clamp(1.1rem,3vw,1.35rem);line-height:2}
-.nav-controls{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding:0 10px}
-.nav-btn{background:rgba(255,255,255,.25);color:#fff;padding:10px 18px;border-radius:20px;font-size:.9rem;box-shadow:none;margin:0}
-.nav-btn:disabled{opacity:.3;cursor:not-allowed}
-.page-indicator{font-size:.9rem;opacity:.8;font-weight:600}
-.heart,.star{position:fixed;top:-20px;pointer-events:none;z-index:0;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh)}}
-.memories-page{justify-content:flex-start;padding-top:28px}
-.memories-head{width:100%;max-width:900px;text-align:center;margin-bottom:18px}
-.memories-head h2{font-size:clamp(2.3rem,6vw,3.5rem);margin-bottom:4px}
-.memories-layout{width:100%;max-width:900px;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.85fr);gap:18px;align-items:start}
-.memory-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:16px}
-.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.photo-card{overflow:hidden;border-radius:16px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2)}
-.photo-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;cursor:zoom-in}
-.photo-caption{padding:11px 12px;font-size:.88rem;line-height:1.55;text-align:left}
-.media-actions,.text-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-.add-btn{background:rgba(255,255,255,.94);color:#7b2341}
-.delete-btn{background:rgba(120,20,55,.8);color:#fff;font-size:.78rem;padding:8px 11px;margin:8px 8px 8px 0}
-.edit-btn{font-size:.78rem;padding:8px 11px;margin:8px 0}
-.video-box{border:1px dashed rgba(255,255,255,.45);border-radius:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;min-height:150px}
-#videoPreview{width:100%;margin-top:12px}#videoPreview video{width:100%;max-height:360px;border-radius:14px;display:block}
-.memory-form{width:100%;max-width:680px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:18px;margin-top:14px;display:none;text-align:left}
-.memory-form.open{display:block}
-.memory-form label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px}
-.memory-form input,.memory-form textarea{width:100%;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:11px 12px;background:rgba(255,255,255,.12);color:#fff;outline:0;margin-bottom:12px;font:inherit}
-.memory-form textarea{min-height:120px;resize:vertical}
-.text-list{width:100%;max-width:760px;display:grid;gap:12px;margin-top:16px}
-.text-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:16px;text-align:left}
-.text-card h3{margin-bottom:7px}.text-card p{white-space:pre-line;line-height:1.7;font-size:.94rem}.text-card small{display:block;margin-top:9px;opacity:.72}
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:3000;display:none;align-items:center;justify-content:center;padding:18px}
-.lightbox.open{display:flex}.lightbox img{max-width:96vw;max-height:88vh;object-fit:contain;border-radius:16px}
-.lightbox-close{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font-size:1.5rem;margin:0}
-.music-dock{position:fixed;top:66px;right:14px;z-index:1800}
-.music-toggle{width:46px;height:46px;padding:0;margin:0;border-radius:50%;font-size:1.25rem}
-.music-panel{position:absolute;top:54px;right:0;width:min(360px,calc(100vw - 28px));padding:10px;border-radius:18px;background:rgba(45,10,25,.92);opacity:0;pointer-events:none;transition:.2s}
-.music-dock.open .music-panel{opacity:1;pointer-events:auto}
-.music-panel iframe{width:100%;height:152px;border:0;border-radius:12px}
-@media(max-width:760px){.memories-layout{grid-template-columns:1fr}.book-container{width:calc(100% - 20px);height:calc(100svh - 100px)}}
-@media(max-width:430px){.photo-grid{grid-template-columns:1fr}}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Montserrat',sans-serif;
+}
+
+html{
+    width:100%;
+    min-height:100%;
+    background:#ff5e8a;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+}
+
+body{
+    background:linear-gradient(135deg,#ff8fb1,#ff5e8a,#c44569);
+    color:#fff;
+    overflow:hidden;
+    transition:1s;
+    height:100vh;
+    min-height:100vh;
+    min-height:100svh;
+    min-height:100dvh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:none;
+    touch-action:manipulation;
+}
+
+body.estrelado{
+    background:linear-gradient(135deg,#020024,#090979,#000);
+}
+
+button,
+a,
+input,
+textarea{
+    -webkit-tap-highlight-color:transparent;
+}
+
+button{
+    -webkit-appearance:none;
+    appearance:none;
+    touch-action:manipulation;
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    background:rgba(255,255,255,.92);
+    color:#7b2341;
+    font-weight:700;
+    transition:.2s ease;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+    margin-bottom:10px;
+}
+
+button:hover{
+    transform:translateY(-1px) scale(1.02);
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+/* =========================
+   BOTÃO DE TEMA
+========================= */
+
+.theme-btn{
+    position:fixed;
+    top:14px;
+    right:14px;
+    width:42px;
+    height:42px;
+    padding:0;
+    border:none;
+    border-radius:999px;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    cursor:pointer;
+    z-index:1000;
+    font-size:1.25rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+
+/* =========================
+   LIVRO
+========================= */
+
+.book-container{
+    width:min(940px,94%);
+    height:min(680px,85vh);
+    height:min(680px,85svh);
+    height:min(680px,85dvh);
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+}
+
+.pages-wrapper{
+    flex:1;
+    position:relative;
+    overflow:hidden;
+    background:rgba(255,255,255,.14);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-radius:24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.page{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    padding:40px 30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+    transform:translateX(40px);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+    scrollbar-width:thin;
+}
+
+.page.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateX(0);
+}
+
+/* =========================
+   PÁGINA INICIAL
+========================= */
+
+.hero h1{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(3.5rem,8vw,5.5rem);
+    line-height:1.05;
+    cursor:pointer;
+    user-select:none;
+    text-shadow:2px 2px 8px rgba(0,0,0,.15);
+    margin-bottom:10px;
+}
+
+.frase{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    max-width:700px;
+    font-size:clamp(1.1rem,2.5vw,1.35rem);
+    line-height:1.7;
+    opacity:.98;
+    text-wrap:balance;
+}
+
+h2{
+    margin-bottom:16px;
+    font-size:clamp(1.3rem,4vw,1.6rem);
+    font-weight:600;
+}
+
+#contador{
+    font-size:clamp(1.2rem,3.5vw,1.5rem);
+    line-height:1.9;
+    margin-top:6px;
+    letter-spacing:.5px;
+    font-weight:600;
+}
+
+.data{
+    margin-top:14px;
+    opacity:.9;
+    font-size:.98rem;
+}
+
+.story-box{
+    width:100%;
+    max-width:800px;
+}
+
+.story{
+    font-size:clamp(.95rem,2.2vw,1.08rem);
+    line-height:1.8;
+    white-space:pre-line;
+    text-align:left;
+}
+
+#carta{
+    white-space:pre-line;
+    line-height:1.8;
+    font-size:clamp(.95rem,2.2vw,1.05rem);
+    max-width:650px;
+    text-align:center;
+}
+
+#motivo{
+    margin-top:15px;
+    font-size:1.2rem;
+    line-height:1.65;
+    min-height:32px;
+    font-weight:600;
+}
+
+.hidden{
+    display:none;
+}
+
+#mensagemSecreta,
+#segredo{
+    margin-top:15px;
+    line-height:1.8;
+    font-style:italic;
+    font-size:1.1rem;
+    max-width:600px;
+}
+
+#segredo{
+    padding:16px;
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:16px;
+    background:rgba(255,255,255,.08);
+}
+
+.final-quote{
+    font-size:clamp(1.1rem,3vw,1.35rem);
+    line-height:2;
+}
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+.nav-controls{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+    padding:0 10px;
+}
+
+.nav-btn{
+    background:rgba(255,255,255,.25);
+    color:#fff;
+    padding:10px 18px;
+    border-radius:20px;
+    font-size:.9rem;
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+    box-shadow:none;
+    margin-bottom:0;
+}
+
+.nav-btn:hover{
+    background:rgba(255,255,255,.4);
+    transform:translateY(0);
+}
+
+.nav-btn:disabled{
+    opacity:.3;
+    cursor:not-allowed;
+    pointer-events:none;
+}
+
+.page-indicator{
+    font-size:.9rem;
+    opacity:.8;
+    font-weight:600;
+}
+
+/* =========================
+   PARTÍCULAS
+========================= */
+
+.heart,
+.star{
+    position:fixed;
+    top:-20px;
+    pointer-events:none;
+    z-index:0;
+    animation:fall linear forwards;
+    filter:drop-shadow(0 3px 6px rgba(0,0,0,.15));
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+/* =========================
+   MEMÓRIAS
+========================= */
+
+.memories-page{
+    justify-content:flex-start;
+    padding-top:28px;
+}
+
+.memories-page::-webkit-scrollbar{
+    width:7px;
+}
+
+.memories-page::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.35);
+    border-radius:10px;
+}
+
+.memories-head{
+    width:100%;
+    max-width:900px;
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.memories-head h2{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(2.3rem,6vw,3.5rem);
+    margin-bottom:4px;
+}
+
+.memories-head p{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    opacity:.92;
+}
+
+.memories-layout{
+    width:100%;
+    max-width:900px;
+    display:grid;
+    grid-template-columns:minmax(0,1.55fr) minmax(260px,.85fr);
+    gap:18px;
+    align-items:start;
+}
+
+.memory-section{
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:20px;
+    padding:16px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+}
+
+.memory-section h3{
+    margin-bottom:12px;
+    font-size:1.15rem;
+}
+
+/* =========================
+   FOTOS
+========================= */
+
+.photo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+}
+
+.photo-card{
+    overflow:hidden;
+    border-radius:16px;
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+
+.photo-card img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    display:block;
+    cursor:zoom-in;
+    transition:transform .25s ease;
+}
+
+.photo-card img:hover{
+    transform:scale(1.025);
+}
+
+/* LEGENDA */
+
+.photo-caption{
+    display:block;
+    padding:11px 12px 8px;
+    font-size:.88rem;
+    line-height:1.55;
+    text-align:left;
+    color:#fff;
+    min-height:42px;
+    word-break:break-word;
+}
+
+/* BOTÕES DA FOTO */
+
+.photo-actions{
+    display:flex;
+    gap:7px;
+    padding:0 10px 11px;
+}
+
+.photo-action-btn{
+    flex:1;
+    margin:0;
+    padding:8px 7px;
+    font-size:.72rem;
+    border-radius:9px;
+    box-shadow:none;
+}
+
+.edit-caption-btn{
+    background:rgba(255,255,255,.9);
+    color:#7b2341;
+}
+
+.delete-photo-btn{
+    background:rgba(120,20,40,.85);
+    color:#fff;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.media-actions,
+.text-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:14px;
+}
+
+.add-btn{
+    background:rgba(255,255,255,.94);
+    color:#7b2341;
+}
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+
+.memory-form{
+    width:100%;
+    max-width:680px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:20px;
+    padding:18px;
+    margin-top:14px;
+    display:none;
+    text-align:left;
+}
+
+.memory-form.open{
+    display:block;
+}
+
+.memory-form label{
+    display:block;
+    font-size:.82rem;
+    font-weight:600;
+    margin:0 0 6px;
+}
+
+.memory-form input,
+.memory-form textarea{
+    width:100%;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:12px;
+    padding:11px 12px;
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    outline:none;
+    margin-bottom:12px;
+    font:inherit;
+}
+
+.memory-form input::placeholder,
+.memory-form textarea::placeholder{
+    color:rgba(255,255,255,.7);
+}
+
+.memory-form textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+/* =========================
+   VÍDEOS
+========================= */
+
+.video-list{
+    display:grid;
+    gap:12px;
+}
+
+.video-card{
+    background:rgba(255,255,255,.08);
+    border-radius:14px;
+    overflow:hidden;
+    padding:8px;
+}
+
+.video-card video{
+    width:100%;
+    max-height:330px;
+    border-radius:10px;
+    display:block;
+}
+
+.video-actions{
+    display:flex;
+    gap:8px;
+    margin-top:8px;
+}
+
+.video-actions button{
+    flex:1;
+    margin:0;
+    padding:9px;
+    font-size:.78rem;
+}
+
+/* =========================
+   TEXTOS
+========================= */
+
+.text-list{
+    width:100%;
+    max-width:760px;
+    display:grid;
+    gap:12px;
+    margin-top:16px;
+}
+
+.text-card{
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:18px;
+    padding:16px;
+    text-align:left;
+}
+
+.text-card h3{
+    margin-bottom:7px;
+    font-family:'Playfair Display',serif;
+}
+
+.text-card p{
+    white-space:pre-line;
+    line-height:1.7;
+    font-size:.94rem;
+}
+
+.text-card small{
+    display:block;
+    margin-top:9px;
+    opacity:.72;
+}
+
+.text-card-actions{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.text-card-actions button{
+    margin:0;
+    padding:8px 12px;
+    font-size:.76rem;
+}
+
+.empty-state{
+    opacity:.78;
+    font-style:italic;
+    margin-top:16px;
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    z-index:3000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    backdrop-filter:blur(2px);
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.lightbox.open{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:96vw;
+    max-height:88vh;
+    object-fit:contain;
+    border-radius:16px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.lightbox-close{
+    position:absolute;
+    top:14px;
+    right:14px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:0;
+    background:rgba(255,255,255,.16);
+    color:#fff;
+    font-size:1.5rem;
+    margin:0;
+    box-shadow:none;
+}
+
+/* =========================
+   MÚSICA
+========================= */
+
+.music-dock{
+    position:fixed;
+    top:66px;
+    right:14px;
+    z-index:1800;
+}
+
+.music-toggle{
+    width:46px;
+    height:46px;
+    padding:0;
+    margin:0;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.92);
+    color:#7b2341;
+    font-size:1.25rem;
+    box-shadow:0 8px 24px rgba(0,0,0,.22);
+    border:1px solid rgba(255,255,255,.5);
+}
+
+.music-panel{
+    position:absolute;
+    top:54px;
+    right:0;
+    width:min(360px,calc(100vw - 28px));
+    padding:10px;
+    border-radius:18px;
+    background:rgba(45,10,25,.92);
+    border:1px solid rgba(255,255,255,.22);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    opacity:0;
+    transform:translateY(-8px) scale(.97);
+    pointer-events:none;
+    transition:.2s ease;
+}
+
+.music-dock.open .music-panel{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+}
+
+.music-title{
+    color:#fff;
+    font-weight:700;
+    font-size:.9rem;
+    padding:2px 4px 8px;
+}
+
+.music-panel iframe{
+    display:block;
+    width:100%;
+    height:152px;
+    border:0;
+    border-radius:12px;
+}
+
+.music-panel a{
+    display:block;
+    color:#fff;
+    text-align:center;
+    font-size:.76rem;
+    margin-top:7px;
+    opacity:.9;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:760px){
+
+    .memories-page{
+        padding:22px 13px;
+    }
+
+    .memories-layout{
+        grid-template-columns:1fr;
+    }
+
+    .photo-grid{
+        gap:10px;
+    }
+
+    .photo-caption{
+        font-size:.82rem;
+    }
+
+    body{
+        align-items:center;
+        justify-content:center;
+    }
+
+    .book-container{
+        width:calc(100% - 20px);
+        height:calc(100svh - 100px);
+        max-height:calc(100svh - 100px);
+    }
+
+}
+
+@media(max-width:640px){
+
+    .page{
+        padding:25px 15px;
+    }
+
+    .memory-form{
+        padding:14px;
+    }
+
+    .media-actions,
+    .text-actions{
+        gap:7px;
+    }
+
+    .add-btn{
+        padding:11px 15px;
+    }
+
+    .music-dock{
+        top:64px;
+        right:10px;
+    }
+
+    .music-panel{
+        width:min(330px,calc(100vw - 20px));
+    }
+
+}
+
+@media(max-width:430px){
+
+    .photo-grid{
+        grid-template-columns:1fr;
+    }
+
+    .photo-card img{
+        aspect-ratio:16/11;
+    }
+
+    .memories-head h2{
+        font-size:2.5rem;
+    }
+
+}
+
+@supports(-webkit-touch-callout:none){
+
+    .page{
+        padding-bottom:max(
+            20px,
+            env(safe-area-inset-bottom)
+        );
+    }
+
+    .book-container{
+        max-height:calc(100svh - 80px);
+    }
+
+}
+
 </style>
 </head>
+
 <body>
 
-<button aria-label="Alternar tema" class="theme-btn" id="themeBtn" onclick="trocarTema()">🌙</button>
+<!-- =========================
+     TEMA
+========================= -->
 
-<div class="music-dock" id="musicDock">
-<button class="music-toggle" onclick="togglePlaylist()">🎵</button>
-<div class="music-panel">
-<strong>Nossa playlist 🎶</strong>
-<iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen src="https://open.spotify.com/embed/playlist/3R8IQUAIPs8DjQF8AOIUO7?utm_source=generator"></iframe>
+<button
+    aria-label="Alternar tema"
+    class="theme-btn"
+    id="themeBtn"
+    onclick="trocarTema()">
+
+    🌙
+
+</button>
+
+
+<!-- =========================
+     MÚSICA
+========================= -->
+
+<div
+    class="music-dock"
+    id="musicDock">
+
+    <button
+        aria-label="Abrir nossa playlist"
+        class="music-toggle"
+        onclick="togglePlaylist()"
+        title="Nossa playlist">
+
+        🎵
+
+    </button>
+
+
+    <div class="music-panel">
+
+        <div class="music-title">
+            Nossa playlist 🎶
+        </div>
+
+        <iframe
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allowfullscreen
+            src="https://open.spotify.com/embed/playlist/3R8IQUAIPs8DjQF8AOIUO7?utm_source=generator">
+        </iframe>
+
+        <a
+            href="https://open.spotify.com/playlist/3R8IQUAIPs8DjQF8AOIUO7"
+            rel="noopener"
+            target="_blank">
+
+            Abrir no Spotify
+
+        </a>
+
+    </div>
+
 </div>
-</div>
+
+
+<!-- =========================
+     LIVRO
+========================= -->
 
 <div class="book-container">
+
 <div class="pages-wrapper">
 
-<div class="page active hero" id="p1">
-<h1 id="tituloSecreto">🌸 Isadora</h1>
-<p class="frase">Teu nome habita meus pensamentos como uma canção que o tempo se recusa a esquecer.</p>
-<div style="margin-top:25px;width:100%;max-width:450px;background:rgba(255,255,255,.08);padding:20px;border-radius:18px">
-<h2>Estamos juntos há:</h2><div id="contador"></div><div>20/05/2026 ♾️</div>
-</div>
-</div>
 
-<div class="page" id="p2">
-<h2>💌 Carta Para Você</h2><button onclick="abrirCarta()">Abrir carta 💌</button><p id="carta"></p>
-</div>
+<!-- =========================
+     PÁGINA 1
+========================= -->
 
-<div class="page" id="p3">
-<div class="story-box"><h2>📖 Nosso comecinho</h2><div><button onclick="abrirHistoria()">Ler nosso comecinho 📖</button></div><p class="story" id="historiaTexto"></p></div>
-</div>
+<div
+    class="page active hero"
+    id="p1">
 
-<div class="page" id="p4">
-<h2>🌹 Algumas coisas que amo em você</h2><button onclick="mostrarMotivo()">🌹 Descobrir</button><p id="motivo"></p>
-</div>
+    <h1 id="tituloSecreto">
+        🌸 Isadora
+    </h1>
 
-<div class="page" id="p5">
-<h2>🔒 Maior verdade</h2><button onclick="abrirSegredo()">Não clique aqui</button>
-<div class="hidden" id="mensagemSecreta">A maior prova da minha sorte é ter você, o que mais penso para meu futuro é você, sempre, sempre ao meu lado.</div>
-<div class="hidden" id="segredo">A maior prova da minha sorte é ter você, o que mais penso para meu futuro é você, sempre, sempre ao meu lado.</div>
-</div>
+    <p class="frase">
+        Teu nome habita meus pensamentos como uma canção que o tempo se recusa a esquecer.
+    </p>
 
-<div class="page memories-page" id="p6">
-<div class="memories-head"><h2>📸 Momentos</h2><p>Fotos e vídeos que eu quero guardar com carinho.</p></div>
-<div class="memories-layout">
+    <div
+        style="
+        margin-top:25px;
+        width:100%;
+        max-width:450px;
+        background:rgba(255,255,255,.08);
+        padding:20px;
+        border-radius:18px
+        ">
 
-<section class="memory-section">
-<div class="photo-grid" id="photoGrid"></div>
-<div class="media-actions">
-<button class="add-btn" onclick="document.getElementById('photoInput').click()">📷 Inserir foto</button>
-<button class="add-btn" onclick="document.getElementById('videoInput').click()">🎥 Inserir vídeo</button>
-<input accept="image/*" hidden id="photoInput" onchange="enviarFoto(event)" type="file"/>
-<input accept="video/*" hidden id="videoInput" onchange="enviarVideo(event)" type="file"/>
-</div>
-</section>
+        <h2>
+            Estamos juntos há:
+        </h2>
 
-<section class="memory-section">
-<h3>🎬 Vídeos</h3>
-<div class="video-box" id="videoBox">
-<div id="videoPreview"></div>
-</div>
-</section>
+        <div id="contador"></div>
+
+        <div class="data">
+            20/05/2026 ♾️
+        </div>
+
+    </div>
 
 </div>
+
+
+<!-- =========================
+     PÁGINA 2
+========================= -->
+
+<div
+    class="page"
+    id="p2">
+
+    <h2>
+        💌 Carta Para Você
+    </h2>
+
+    <button onclick="abrirCarta()">
+        Abrir carta 💌
+    </button>
+
+    <p id="carta"></p>
+
 </div>
 
-<div class="page memories-page" id="p7">
-<div class="memories-head"><h2>💌 Nossos textos</h2><p>Palavras que merecem ficar guardadas.</p></div>
-<div class="text-actions"><button class="add-btn" onclick="novoTexto()">✍️ Adicionar texto</button></div>
-<div class="memory-form" id="textoForm">
-<label>Título (opcional)</label><input id="textoTitulo" maxlength="90" placeholder="Ex.: Um dia que quero lembrar"/>
-<label>Texto</label><textarea id="textoConteudo" maxlength="3000" placeholder="Escreva aqui..."></textarea>
-<div class="text-actions"><button onclick="salvarTexto()">Salvar texto</button><button class="nav-btn" onclick="cancelarTexto()">Cancelar</button></div>
-</div>
-<div class="text-list" id="textList"></div><p id="textEmpty">Ainda não há textos adicionados.</p>
+
+<!-- =========================
+     PÁGINA 3
+========================= -->
+
+<div
+    class="page"
+    id="p3">
+
+    <div class="story-box">
+
+        <h2 style="text-align:center">
+            📖 Nosso comecinho
+        </h2>
+
+        <div style="text-align:center">
+
+            <button onclick="abrirHistoria()">
+                Ler nosso comecinho 📖
+            </button>
+
+        </div>
+
+        <p
+            class="story"
+            id="historiaTexto">
+        </p>
+
+    </div>
+
 </div>
 
-<div class="page" id="p8">
-<div class="final-quote">∞<br/><br/><em>"Se eu pudesse escolher novamente,<br/>ainda escolheria você."</em><br/><br/>∞</div>
-<div style="margin-top:30px;font-weight:600;font-size:1.1rem">De: Keviny ❤️ | Para: Isadora ❤️</div>
-</div>
+
+<!-- =========================
+     PÁGINA 4
+========================= -->
+
+<div
+    class="page"
+    id="p4">
+
+    <h2>
+        🌹 Algumas coisas que amo em você
+    </h2>
+
+    <button onclick="mostrarMotivo()">
+        🌹 Descobrir
+    </button>
+
+    <p id="motivo"></p>
 
 </div>
+
+
+<!-- =========================
+     PÁGINA 5
+========================= -->
+
+<div
+    class="page"
+    id="p5">
+
+    <h2>
+        🔒 Maior verdade
+    </h2>
+
+    <button onclick="abrirSegredo()">
+        Não clique aqui
+    </button>
+
+    <div
+        class="hidden"
+        id="mensagemSecreta">
+
+        A maior prova da minha sorte é ter você, o que mais penso para meu futuro é você, sempre, sempre ao meu lado.
+
+    </div>
+
+    <div
+        class="hidden"
+        id="segredo">
+
+        A maior prova da minha sorte é ter você, o que mais penso para meu futuro é você, sempre, sempre ao meu lado.
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PÁGINA 6
+     FOTOS E VÍDEOS
+========================= -->
+
+<div
+    class="page memories-page"
+    id="p6">
+
+    <div class="memories-head">
+
+        <h2>
+            📸 Momentos
+        </h2>
+
+        <p>
+            Fotos e vídeos que eu quero guardar com carinho.
+        </p>
+
+    </div>
+
+
+    <div class="memories-layout">
+
+
+        <!-- =========================
+             FOTOS
+        ========================= -->
+
+        <section
+            class="memory-section photo-board">
+
+            <h3>
+                📷 Fotos
+            </h3>
+
+            <div
+                class="photo-grid"
+                id="photoGrid">
+            </div>
+
+
+            <!-- INPUT ESCONDIDO -->
+
+            <input
+                accept="image/*"
+                hidden
+                id="photoInput"
+                multiple
+                onchange="adicionarFotos(event)"
+                type="file"
+            />
+
+
+            <div class="media-actions">
+
+                <button
+                    class="add-btn"
+                    type="button"
+                    onclick="document.getElementById('photoInput').click()">
+
+                    📷 Inserir foto
+
+                </button>
+
+                <button
+                    class="add-btn"
+                    type="button"
+                    onclick="document.getElementById('videoInput').click()">
+
+                    🎥 Inserir vídeo
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             VÍDEOS
+        ========================= -->
+
+        <div>
+
+            <section class="memory-section">
+
+                <h3>
+                    🎬 Vídeos
+                </h3>
+
+                <input
+                    accept="video/*"
+                    hidden
+                    id="videoInput"
+                    multiple
+                    onchange="inserirVideo(event)"
+                    type="file"
+                />
+
+                <div
+                    class="video-list"
+                    id="videoList">
+
+                    <p
+                        class="empty-state"
+                        id="videoEmpty">
+
+                        Ainda não há vídeos adicionados.
+
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PÁGINA 7
+     TEXTOS
+========================= -->
+
+<div
+    class="page memories-page"
+    id="p7">
+
+    <div class="memories-head">
+
+        <h2>
+            💌 Nossos textos
+        </h2>
+
+        <p>
+            Palavras que merecem ficar guardadas.
+        </p>
+
+    </div>
+
+
+    <div class="text-actions">
+
+        <button
+            class="add-btn"
+            type="button"
+            onclick="toggleTextoForm()">
+
+            ✍️ Adicionar texto
+
+        </button>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+
+    <div
+        class="memory-form"
+        id="textoForm">
+
+        <label for="textoTitulo">
+            Título (opcional)
+        </label>
+
+        <input
+            id="textoTitulo"
+            maxlength="90"
+            placeholder="Ex.: Um dia que quero lembrar"
+        />
+
+
+        <label for="textoConteudo">
+            Texto
+        </label>
+
+        <textarea
+            id="textoConteudo"
+            maxlength="3000"
+            placeholder="Escreva aqui..."
+            required>
+        </textarea>
+
+
+        <div class="text-actions">
+
+            <button
+                type="button"
+                onclick="salvarTexto()">
+
+                Salvar texto
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                type="button"
+                onclick="toggleTextoForm()">
+
+                Cancelar
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="text-list"
+        id="textList">
+    </div>
+
+
+    <p
+        class="empty-state"
+        id="textEmpty">
+
+        Ainda não há textos adicionados.
+
+    </p>
+
+</div>
+
+
+<!-- =========================
+     PÁGINA 8
+========================= -->
+
+<div
+    class="page"
+    id="p8">
+
+    <div class="final-quote">
+
+        ∞
+
+        <br/>
+        <br/>
+
+        <em>
+
+            "Se eu pudesse escolher novamente,
+
+            <br/>
+
+            ainda escolheria você."
+
+        </em>
+
+        <br/>
+        <br/>
+
+        ∞
+
+    </div>
+
+
+    <div
+        style="
+        margin-top:30px;
+        font-weight:600;
+        font-size:1.1rem
+        ">
+
+        De: Keviny ❤️
+
+        &nbsp;|&nbsp;
+
+        Para: Isadora ❤️
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     NAVEGAÇÃO
+========================= -->
 
 <div class="nav-controls">
-<button class="nav-btn" disabled id="prevBtn" onclick="mudarPagina(-1)">◀ Voltar</button>
-<span class="page-indicator" id="pageIndicator">Página 1 de 8</span>
-<button class="nav-btn" id="nextBtn" onclick="mudarPagina(1)">Avançar ▶</button>
-</div>
+
+    <button
+        class="nav-btn"
+        disabled
+        id="prevBtn"
+        onclick="mudarPagina(-1)">
+
+        ◀ Voltar
+
+    </button>
+
+
+    <span
+        class="page-indicator"
+        id="pageIndicator">
+
+        Página 1 de 8
+
+    </span>
+
+
+    <button
+        class="nav-btn"
+        id="nextBtn"
+        onclick="mudarPagina(1)">
+
+        Avançar ▶
+
+    </button>
+
 </div>
 
-<div class="lightbox" id="lightbox" onclick="fecharFoto(event)">
-<button class="lightbox-close" onclick="fecharFoto()">×</button><img id="lightboxImg" src="" alt="Foto ampliada"/>
 </div>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div
+    aria-label="Foto ampliada"
+    aria-modal="true"
+    class="lightbox"
+    id="lightbox"
+    onclick="fecharFoto(event)"
+    role="dialog">
+
+    <button
+        aria-label="Fechar foto"
+        class="lightbox-close"
+        onclick="fecharFoto()">
+
+        ×
+
+    </button>
+
+    <img
+        alt="Foto ampliada"
+        id="lightboxImg"
+        src=""
+    />
+
+</div>
+
 
 <script>
-/* =========================
-   CONFIGURAÇÃO SUPABASE
-   ========================= */
-const SUPABASE_URL="https://nhmgqktflcuwqzawfxan.supabase.co";
-const SUPABASE_KEY="sb_publishable_mVmLJLRskPluXZwqIUDtew_tBiTYlmD";
-const BUCKET="memory-media";
 
-/* Navegação */
-let paginaAtual=1,totalPaginas=8;
-function mudarPagina(d){
- const antiga=document.getElementById("p"+paginaAtual);
- paginaAtual+=d;
- if(paginaAtual<1)paginaAtual=1;
- if(paginaAtual>totalPaginas)paginaAtual=totalPaginas;
- const nova=document.getElementById("p"+paginaAtual);
- if(antiga)antiga.classList.remove("active");
- if(nova)nova.classList.add("active");
- prevBtn.disabled=paginaAtual===1;
- nextBtn.disabled=paginaAtual===totalPaginas;
- pageIndicator.textContent=`Página ${paginaAtual} de ${totalPaginas}`;
+/* =========================================================
+   CONFIGURAÇÕES
+========================================================= */
+
+/*
+   CHAVES DO LOCALSTORAGE
+*/
+
+const STORAGE_FOTOS =
+    'cartinha_fotos_v2';
+
+const STORAGE_LEGENDAS =
+    'cartinha_legendas_v2';
+
+const STORAGE_FOTOS_EXCLUIDAS =
+    'cartinha_fotos_excluidas_v2';
+
+const STORAGE_TEXTOS =
+    'carta_textos';
+
+const STORAGE_VIDEOS =
+    'cartinha_videos_v2';
+
+
+/* =========================================================
+   FOTOS ORIGINAIS
+========================================================= */
+
+const fotosOriginais = [
+
+    {
+
+        id:'foto1',
+
+        src:
+        'https://nhmgqktflcuwqzawfxan.supabase.co/storage/v1/object/public/memory-media/Nossas%20skins.jpg',
+
+        alt:
+        'Nossas skins',
+
+        legenda:
+        'Nossas skins, esse print me faz pensar que um dia poderemos fzr essa foto sem ser os bonequinhos...'
+
+    },
+
+
+    {
+
+        id:'foto2',
+
+        src:
+        'https://nhmgqktflcuwqzawfxan.supabase.co/storage/v1/object/public/memory-media/Print%20skin%20%20%281%29.jpg',
+
+        alt:
+        'Primeiro print da nova skin',
+
+        legenda:
+        'primeiro print da sua nova skin q ficou mt fofa'
+
+    },
+
+
+    {
+
+        id:'foto3',
+
+        src:
+        'https://nhmgqktflcuwqzawfxan.supabase.co/storage/v1/object/public/memory-media/que%20fofa%20meudeuso.jpg',
+
+        alt:
+        'Foto dela',
+
+        legenda:
+        'simples a mulher mais fofa do mundo, como resistir??'
+
+    },
+
+
+    {
+
+        id:'foto4',
+
+        src:
+        'https://nhmgqktflcuwqzawfxan.supabase.co/storage/v1/object/public/memory-media/Mt%20estilosa.jpg',
+
+        alt:
+        'Foto dela estilosa',
+
+        legenda:
+        'simplesmente você'
+
+    }
+
+];
+
+
+/* =========================================================
+   FUNÇÕES DE LOCALSTORAGE
+========================================================= */
+
+function obterStorage(chave,valorPadrao){
+
+    try{
+
+        const valor =
+            localStorage.getItem(chave);
+
+        if(!valor){
+            return valorPadrao;
+        }
+
+        return JSON.parse(valor);
+
+    }
+
+    catch(e){
+
+        return valorPadrao;
+
+    }
+
 }
 
-/* Contador */
-const inicio=new Date(2026,4,20,23,56,0);
+
+function salvarStorage(chave,valor){
+
+    try{
+
+        localStorage.setItem(
+            chave,
+            JSON.stringify(valor)
+        );
+
+    }
+
+    catch(e){
+
+        console.error(e);
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+const inicio =
+    new Date(
+        2026,
+        4,
+        20,
+        23,
+        56,
+        0
+    );
+
+
 function atualizarContador(){
- const agora=new Date(),diff=agora-inicio;
- const dias=Math.floor(diff/86400000);
- const horas=Math.floor(diff%86400000/3600000);
- const minutos=Math.floor(diff%3600000/60000);
- const segundos=Math.floor(diff%60000/1000);
- contador.innerHTML=`❤️ ${dias} dias<br>🕐 ${horas} horas<br>⏳ ${minutos} minutos<br>✨ ${segundos} segundos`;
-}
-setInterval(atualizarContador,1000);atualizarContador();
 
-/* Carta / história */
-const historiaCompleta=`Bem, vou começar pelos dias que via e falava pouco contigo mas gostava daqueles momentos curtos, você me divertia bastante, mesmo que não fôssemos próximos ainda. Com o tempo a gente foi se aproximando com aquele grupo que vejo ser importante para nosso desenvolvimento como amigos e namorados. Eu a cada dia que jogava contigo sentia mais uma vontade enorme de ter você mais e mais, simplesmente MAIS. Eu não consigo mensurar o quão significativa tem sido você para mim, se tornou a pessoinha que tanto quero e amo, da vontade de pegar e guardar só pra mim, te tornar minha e de mais ninguém... É percebendo esses sentimentos principalmente no dia naquela hidromassagem no jogo de parque aquático que decidi: "eu amo essa menina com toda a minha alma". Eu sinceramente só te desejo para mim pelo resto da minha vida, eu te amo, de modo mais sincero e verdadeiro que existe, minha princesa.`;
-const poema=`Você chegou devagar,
+    const agora =
+        new Date();
+
+    const diff =
+        agora - inicio;
+
+
+    const dias =
+        Math.floor(
+            diff /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
+        );
+
+
+    const horas =
+        Math.floor(
+
+            diff %
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
+
+            /
+
+            (
+                1000 *
+                60 *
+                60
+            )
+
+        );
+
+
+    const minutes =
+        Math.floor(
+
+            diff %
+            (
+                1000 *
+                60 *
+                60
+            )
+
+            /
+
+            (
+                1000 *
+                60
+            )
+
+        );
+
+
+    const segundos =
+        Math.floor(
+
+            diff %
+            (
+                1000 *
+                60
+            )
+
+            /
+
+            1000
+
+        );
+
+
+    const contDiv =
+        document.getElementById(
+            'contador'
+        );
+
+
+    if(contDiv){
+
+        contDiv.innerHTML =
+
+        `❤️ ${dias} dias<br>
+        🕐 ${horas} horas<br>
+        ⏳ ${minutes} minutos<br>
+        ✨ ${segundos} segundos`;
+
+    }
+
+}
+
+
+setInterval(
+    atualizarContador,
+    1000
+);
+
+atualizarContador();
+
+
+/* =========================================================
+   PAGINAÇÃO
+========================================================= */
+
+let paginaAtual =
+    1;
+
+
+const totalPaginas =
+    8;
+
+
+function mudarPagina(direcao){
+
+    const paginaAntiga =
+        document.getElementById(
+            `p${paginaAtual}`
+        );
+
+
+    paginaAtual +=
+        direcao;
+
+
+    if(paginaAtual < 1){
+
+        paginaAtual =
+            1;
+
+    }
+
+
+    if(paginaAtual > totalPaginas){
+
+        paginaAtual =
+            totalPaginas;
+
+    }
+
+
+    const paginaNova =
+        document.getElementById(
+            `p${paginaAtual}`
+        );
+
+
+    if(paginaAntiga){
+
+        paginaAntiga
+        .classList
+        .remove('active');
+
+    }
+
+
+    if(paginaNova){
+
+        paginaNova
+        .classList
+        .add('active');
+
+    }
+
+
+    document
+    .getElementById(
+        'prevBtn'
+    )
+    .disabled =
+        paginaAtual === 1;
+
+
+    document
+    .getElementById(
+        'nextBtn'
+    )
+    .disabled =
+        paginaAtual === totalPaginas;
+
+
+    document
+    .getElementById(
+        'pageIndicator'
+    )
+    .textContent =
+
+    `Página ${paginaAtual} de ${totalPaginas}`;
+
+}
+
+
+/* =========================================================
+   HISTÓRIA
+========================================================= */
+
+const historiaCompleta = `
+
+Bem, vou começar pelos dias que via e falava pouco contigo mas gostava daqueles momentos curtos, você me divertia bastante, mesmo que não fôssemos próximos ainda.
+
+Com o tempo a gente foi se aproximando com aquele grupo que vejo ser importante para nosso desenvolvimento como amigos e namorados.
+
+Eu a cada dia que jogava contigo sentia mais uma vontade enorme de ter você mais e mais, simplesmente MAIS.
+
+Eu não consigo mensurar o quão significativa tem sido você para mim, se tornou a pessoinha que tanto quero e amo, da vontade de pegar e guardar só pra mim, te tornar minha e de mais ninguém...
+
+É percebendo esses sentimentos principalmente no dia naquela hidromassagem no jogo de parque aquático que decidi:
+
+"eu amo essa menina com toda a minha alma".
+
+Eu sinceramente só te desejo para mim pelo resto da minha vida, eu te amo, de modo mais sincero e verdadeiro que existe, minha princesa.
+
+`;
+
+
+let cartaIniciada =
+    false;
+
+
+let historiaIniciada =
+    false;
+
+
+/* =========================================================
+   CARTA
+========================================================= */
+
+const poema = `
+
+Você chegou devagar,
 mas ocupou todos os espaços.
+
 Como a luz invade uma janela ao amanhecer,
 sem pedir licença, sem fazer barulho,
 apenas transformando tudo o que toca.
+
 E desde então, as horas passaram a ter outro peso,
 mais leves, mais bonitas, mais nossas.
+
 Como se o universo tivesse encontrado uma forma sutil
 de me lembrar, em cada detalhe,
 que você faz parte dos meus melhores dias.
+
 Porque amar você não é apenas sentir,
 é descobrir novos significados para existir.
+
 É encontrar abrigo em um abraço,
 paz em um sorriso,
-e infinito em alguém que segura a minha mão. ❤️`;
-let cartaIniciada=false,historiaIniciada=false;
-function abrirCarta(){if(cartaIniciada)return;cartaIniciada=true;let i=0;function t(){if(i<poema.length){carta.textContent+=poema[i++];setTimeout(t,30)}}t()}
-function abrirHistoria(){if(historiaIniciada)return;historiaIniciada=true;let i=0;function t(){if(i<historiaCompleta.length){historiaTexto.textContent+=historiaCompleta[i++];setTimeout(t,25)}}t()}
+e infinito em alguém que segura a minha mão. ❤️
 
-/* Motivos / tema */
-const motivos=['Seu humor MUITO duvidoso','Seu jeitinho de cuidar de mim','As nossas conversas','O seu jeito de demonstrar carinho','Sua conexão imediata comigo','O fato de você ser você'];
-function mostrarMotivo(){motivo.textContent=motivos[Math.floor(Math.random()*motivos.length)]}
-function abrirSegredo(){mensagemSecreta.classList.toggle("hidden")}
-let cliques=0;
-tituloSecreto.addEventListener("click",()=>{cliques++;if(cliques>=5)segredo.classList.remove("hidden")});
-function trocarTema(){document.body.classList.toggle("estrelado");themeBtn.textContent=document.body.classList.contains("estrelado")?"❤️":"🌙"}
+`;
+
+
+function abrirCarta(){
+
+    if(cartaIniciada){
+        return;
+    }
+
+
+    cartaIniciada =
+        true;
+
+
+    let idx =
+        0;
+
+
+    function escreverCarta(){
+
+        if(
+            idx <
+            poema.length
+        ){
+
+            document
+            .getElementById(
+                'carta'
+            )
+            .innerHTML +=
+                poema.charAt(idx);
+
+
+            idx++;
+
+
+            setTimeout(
+                escreverCarta,
+                30
+            );
+
+        }
+
+    }
+
+
+    escreverCarta();
+
+}
+
+
+/* =========================================================
+   HISTÓRIA DIGITANDO
+========================================================= */
+
+function abrirHistoria(){
+
+    if(historiaIniciada){
+        return;
+    }
+
+
+    historiaIniciada =
+        true;
+
+
+    let i =
+        0;
+
+
+    function digitarHistoria(){
+
+        if(
+            i <
+            historiaCompleta.length
+        ){
+
+            document
+            .getElementById(
+                'historiaTexto'
+            )
+            .innerHTML +=
+                historiaCompleta.charAt(i);
+
+
+            i++;
+
+
+            setTimeout(
+                digitarHistoria,
+                25
+            );
+
+        }
+
+    }
+
+
+    digitarHistoria();
+
+}
+
+
+/* =========================================================
+   MOTIVOS
+========================================================= */
+
+const motivos = [
+
+    'Seu humor MUITO duvidoso',
+
+    'Seu jeitinho de cuidar de mim',
+
+    'As nossas conversas',
+
+    'O seu jeito de demonstrar carinho',
+
+    'Sua conexão imediata comigo',
+
+    'O fato de você ser você'
+
+];
+
+
+function mostrarMotivo(){
+
+    document
+    .getElementById(
+        'motivo'
+    )
+    .innerHTML =
+
+    motivos[
+        Math.floor(
+            Math.random() *
+            motivos.length
+        )
+    ];
+
+}
+
+
+/* =========================================================
+   SEGREDO
+========================================================= */
+
+function abrirSegredo(){
+
+    document
+    .getElementById(
+        'mensagemSecreta'
+    )
+    .classList
+    .toggle('hidden');
+
+}
+
+
+let cliques =
+    0;
+
+
+document
+.getElementById(
+    'tituloSecreto'
+)
+.addEventListener(
+    'click',
+    ()=>{
+
+        cliques++;
+
+
+        if(cliques >= 5){
+
+            document
+            .getElementById(
+                'segredo'
+            )
+            .classList
+            .remove('hidden');
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   TEMA
+========================================================= */
+
+function trocarTema(){
+
+    document.body
+    .classList
+    .toggle('estrelado');
+
+
+    document
+    .getElementById(
+        'themeBtn'
+    )
+    .textContent =
+
+    document.body
+    .classList
+    .contains('estrelado')
+
+    ? '❤️'
+
+    : '🌙';
+
+}
+
+
+/* =========================================================
+   PARTÍCULAS
+========================================================= */
+
 function criarParticula(){
- const p=document.createElement("div");
- p.className=document.body.classList.contains("estrelado")?"star":"heart";
- p.textContent=document.body.classList.contains("estrelado")?(Math.random()>.5?"⭐":"✨"):"❤️";
- p.style.left=Math.random()*100+"vw";p.style.animationDuration=3+Math.random()*4+"s";p.style.fontSize=16+Math.random()*10+"px";
- document.body.appendChild(p);setTimeout(()=>p.remove(),7000);
-}
-setInterval(criarParticula,200);
 
-/* Playlist */
-function togglePlaylist(){musicDock.classList.toggle("open")}
-document.addEventListener("click",e=>{if(musicDock.classList.contains("open")&&!musicDock.contains(e.target))musicDock.classList.remove("open")});
+    const p =
+        document.createElement(
+            'div'
+        );
 
-/* Lightbox */
-function abrirFoto(src){lightboxImg.src=src;lightbox.classList.add("open");document.body.style.overflow="hidden"}
-function fecharFoto(e){
- if(e&&e.target&&e.target.id!=="lightbox"&&!e.target.classList.contains("lightbox-close"))return;
- lightbox.classList.remove("open");lightboxImg.src="";document.body.style.overflow="";
-}
 
-/* =========================
-   SUPABASE STORAGE
-   ========================= */
-async function supabaseRequest(path,options={}){
- const headers=Object.assign({
-   "apikey":SUPABASE_KEY,
-   "Authorization":"Bearer "+SUPABASE_KEY
- },options.headers||{});
- const res=await fetch(SUPABASE_URL+path,Object.assign({},options,{headers}));
- if(!res.ok){
-   const texto=await res.text();
-   throw new Error(texto||("HTTP "+res.status));
- }
- return res;
-}
+    if(
 
-function publicUrl(nome){
- return SUPABASE_URL+"/storage/v1/object/public/"+BUCKET+"/"+encodeURIComponent(nome);
-}
+        document.body
+        .classList
+        .contains('estrelado')
 
-function nomeArquivo(file){
- const ext=(file.name.split(".").pop()||"bin").replace(/[^a-z0-9]/gi,"").toLowerCase();
- return Date.now()+"_"+Math.random().toString(36).slice(2,9)+"."+ext;
-}
+    ){
 
-/* Lista os arquivos da pasta memories */
-async function listarArquivos(){
- const res=await supabaseRequest("/storage/v1/object/list/"+BUCKET,{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({prefix:"",limit:100,offset:0,sortBy:{column:"created_at",order:"desc"}})
- });
- return await res.json();
-}
+        p.className =
+            'star';
 
-async function carregarMidias(){
- const grid=document.getElementById("photoGrid");
- const preview=document.getElementById("videoPreview");
- grid.innerHTML="";
- preview.innerHTML="";
- try{
-   const arquivos=await listarArquivos();
-   const fotos=arquivos.filter(x=>/\.(jpg|jpeg|png|gif|webp)$/i.test(x.name));
-   const videos=arquivos.filter(x=>/\.(mp4|webm|mov|m4v|ogg)$/i.test(x.name));
 
-   fotos.forEach(f=>{
-     const card=document.createElement("article");
-     card.className="photo-card";
-     const img=document.createElement("img");
-     img.src=publicUrl(f.name);img.alt="Memória";img.loading="lazy";
-     img.onclick=()=>abrirFoto(img.src);
-     const botoes=document.createElement("div");
-     botoes.style.padding="0 10px";
-     const remover=document.createElement("button");
-     remover.className="delete-btn";remover.textContent="🗑️ Remover";
-     remover.onclick=()=>removerMidia(f.name);
-     botoes.appendChild(remover);
-     card.append(img,botoes);
-     grid.appendChild(card);
-   });
+        p.innerHTML =
 
-   if(!fotos.length)grid.innerHTML='<p style="opacity:.75">Nenhuma foto adicionada ainda.</p>';
+            Math.random() > .5
 
-   if(videos.length){
-     const f=videos[0];
-     const wrap=document.createElement("div");
-     const video=document.createElement("video");
-     video.controls=true;video.playsInline=true;video.preload="metadata";video.src=publicUrl(f.name);
-     video.style.width="100%";video.style.maxHeight="360px";video.style.borderRadius="14px";
-     const remover=document.createElement("button");
-     remover.className="delete-btn";remover.textContent="🗑️ Remover vídeo";
-     remover.onclick=()=>removerMidia(f.name);
-     wrap.append(video,remover);preview.appendChild(wrap);
-   }else{
-     preview.innerHTML='<p style="opacity:.75">Nenhum vídeo adicionado ainda.</p>';
-   }
- }catch(err){
-   console.error(err);
-   grid.innerHTML='<p style="opacity:.85">Não foi possível carregar as fotos da nuvem.</p>';
-   preview.innerHTML='<p style="opacity:.85">Não foi possível carregar os vídeos da nuvem.</p>';
- }
+            ? '⭐'
+
+            : '✨';
+
+    }
+
+    else{
+
+        p.className =
+            'heart';
+
+
+        p.innerHTML =
+            '❤️';
+
+    }
+
+
+    p.style.left =
+        Math.random() *
+        100 +
+        'vw';
+
+
+    p.style.animationDuration =
+
+        3 +
+        Math.random() *
+        4 +
+        's';
+
+
+    p.style.fontSize =
+
+        16 +
+        Math.random() *
+        10 +
+        'px';
+
+
+    document.body
+    .appendChild(p);
+
+
+    setTimeout(
+        ()=>{
+
+            p.remove();
+
+        },
+        7000
+    );
+
 }
 
-async function enviarArquivo(file){
- if(!file)return;
- const nome=nomeArquivo(file);
- try{
-   await supabaseRequest("/storage/v1/object/"+BUCKET+"/"+encodeURIComponent(nome),{
-     method:"POST",
-     headers:{"Content-Type":file.type||"application/octet-stream","x-upsert":"false"},
-     body:file
-   });
-   alert("Arquivo enviado para a nuvem com sucesso! ☁️");
-   await carregarMidias();
- }catch(err){
-   console.error(err);
-   alert("Não foi possível enviar o arquivo. Verifique as políticas do Storage do Supabase.");
- }
+
+setInterval(
+    criarParticula,
+    500
+);
+
+
+/* =========================================================
+   PLAYLIST
+========================================================= */
+
+function togglePlaylist(){
+
+    const dock =
+        document.getElementById(
+            'musicDock'
+        );
+
+
+    if(dock){
+
+        dock
+        .classList
+        .toggle('open');
+
+    }
+
 }
 
-function enviarFoto(e){const f=e.target.files?.[0];e.target.value="";if(f)enviarArquivo(f)}
-function enviarVideo(e){const f=e.target.files?.[0];e.target.value="";if(f)enviarArquivo(f)}
 
-async function removerMidia(nome){
- if(!confirm("Tem certeza que deseja remover esta mídia da nuvem?"))return;
- try{
-   await supabaseRequest("/storage/v1/object/"+BUCKET,{
-     method:"DELETE",
-     headers:{"Content-Type":"application/json"},
-     body:JSON.stringify({prefix:"",paths:[nome]})
-   });
-   alert("Mídia removida com sucesso. 🗑️");
-   await carregarMidias();
- }catch(err){
-   console.error(err);
-   alert("Não foi possível remover a mídia. Verifique as políticas do Storage.");
- }
+document.addEventListener(
+    'click',
+    event=>{
+
+        const dock =
+            document.getElementById(
+                'musicDock'
+            );
+
+
+        if(
+            !dock ||
+            !dock.classList.contains('open')
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            !dock.contains(
+                event.target
+            )
+        ){
+
+            dock
+            .classList
+            .remove('open');
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+function abrirFoto(src){
+
+    const box =
+        document.getElementById(
+            'lightbox'
+        );
+
+
+    const img =
+        document.getElementById(
+            'lightboxImg'
+        );
+
+
+    if(
+        !box ||
+        !img
+    ){
+        return;
+    }
+
+
+    img.src =
+        src;
+
+
+    box
+    .classList
+    .add('open');
+
+
+    document.body.style.overflow =
+        'hidden';
+
 }
 
-/* =========================
-   TEXTOS: salvar / editar / remover
-   ========================= */
-let textoEditando=-1;
 
-function lerTextos(){
- try{return JSON.parse(localStorage.getItem("carta_textos")||"[]")}catch{return[]}
+function fecharFoto(event){
+
+    if(
+
+        event &&
+        event.target &&
+        event.target.id !== 'lightbox' &&
+        !event.target.classList.contains(
+            'lightbox-close'
+        )
+
+    ){
+
+        return;
+
+    }
+
+
+    const box =
+        document.getElementById(
+            'lightbox'
+        );
+
+
+    const img =
+        document.getElementById(
+            'lightboxImg'
+        );
+
+
+    if(box){
+
+        box
+        .classList
+        .remove('open');
+
+    }
+
+
+    if(img){
+
+        img.src =
+            '';
+
+    }
+
+
+    document.body.style.overflow =
+        '';
+
 }
-function salvarListaTextos(lista){localStorage.setItem("carta_textos",JSON.stringify(lista))}
-function novoTexto(){
- textoEditando=-1;
- textoTitulo.value="";textoConteudo.value="";
- textoForm.classList.add("open");textoConteudo.focus();
+
+
+document.addEventListener(
+    'keydown',
+    event=>{
+
+        if(
+            event.key ===
+            'Escape'
+        ){
+
+            fecharFoto();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SISTEMA DE FOTOS
+========================================================= */
+
+
+/*
+   Retorna todas as legendas
+*/
+
+function obterLegendas(){
+
+    return obterStorage(
+        STORAGE_LEGENDAS,
+        {}
+    );
+
 }
-function cancelarTexto(){textoEditando=-1;textoForm.classList.remove("open")}
-function salvarTexto(){
- const titulo=textoTitulo.value.trim(),conteudo=textoConteudo.value.trim();
- if(!conteudo){alert("Escreva algum texto antes de salvar.");return}
- const itens=lerTextos();
- if(textoEditando>=0){
-   itens[textoEditando].titulo=titulo;
-   itens[textoEditando].conteudo=conteudo;
- }else{
-   itens.unshift({titulo,conteudo,data:new Date().toLocaleDateString("pt-BR")});
- }
- salvarListaTextos(itens);cancelarTexto();carregarTextos();
+
+
+/*
+   Retorna fotos adicionadas pelo usuário
+*/
+
+function obterFotosAdicionadas(){
+
+    return obterStorage(
+        STORAGE_FOTOS,
+        []
+    );
+
 }
-function editarTexto(i){
- const itens=lerTextos();const item=itens[i];if(!item)return;
- textoEditando=i;textoTitulo.value=item.titulo||"";textoConteudo.value=item.conteudo||"";
- textoForm.classList.add("open");textoConteudo.focus();
+
+
+/*
+   Retorna IDs das fotos excluídas
+*/
+
+function obterFotosExcluidas(){
+
+    return obterStorage(
+        STORAGE_FOTOS_EXCLUIDAS,
+        []
+    );
+
 }
-function removerTexto(i){
- if(!confirm("Tem certeza que deseja remover este texto?"))return;
- const itens=lerTextos();itens.splice(i,1);salvarListaTextos(itens);carregarTextos();
+
+
+/*
+   Mostra todas as fotos
+*/
+
+function carregarFotos(){
+
+    const grid =
+        document.getElementById(
+            'photoGrid'
+        );
+
+
+    if(!grid){
+        return;
+    }
+
+
+    const legendas =
+        obterLegendas();
+
+
+    const excluidas =
+        obterFotosExcluidas();
+
+
+    const adicionadas =
+        obterFotosAdicionadas();
+
+
+    grid.innerHTML =
+        '';
+
+
+    const todasFotos = [
+
+        ...fotosOriginais,
+
+        ...adicionadas
+
+    ];
+
+
+    todasFotos
+    .filter(
+
+        foto =>
+        !excluidas.includes(
+            foto.id
+        )
+
+    )
+    .forEach(
+        foto=>{
+
+            const article =
+                document.createElement(
+                    'article'
+                );
+
+
+            article.className =
+                'photo-card';
+
+
+            const imagem =
+                document.createElement(
+                    'img'
+                );
+
+
+            imagem.src =
+                foto.src;
+
+
+            imagem.alt =
+                foto.alt ||
+                'Foto';
+
+
+            imagem.loading =
+                'lazy';
+
+
+            imagem.tabIndex =
+                0;
+
+
+            imagem.onclick =
+                ()=>{
+
+                    abrirFoto(
+                        foto.src
+                    );
+
+                };
+
+
+            imagem.onkeydown =
+                event=>{
+
+                    if(
+                        event.key ===
+                        'Enter'
+                    ){
+
+                        abrirFoto(
+                            foto.src
+                        );
+
+                    }
+
+                };
+
+
+            const caption =
+                document.createElement(
+                    'div'
+                );
+
+
+            caption.className =
+                'photo-caption';
+
+
+            caption.textContent =
+
+                legendas[foto.id] !== undefined
+
+                ? legendas[foto.id]
+
+                : foto.legenda;
+
+
+            const actions =
+                document.createElement(
+                    'div'
+                );
+
+
+            actions.className =
+                'photo-actions';
+
+
+            const editarBtn =
+                document.createElement(
+                    'button'
+                );
+
+
+            editarBtn.type =
+                'button';
+
+
+            editarBtn.className =
+
+                'photo-action-btn edit-caption-btn';
+
+
+            editarBtn.textContent =
+                '✏️ Editar';
+
+
+            editarBtn.onclick =
+                ()=>{
+
+                    editarLegenda(
+                        foto.id,
+                        caption.textContent
+                    );
+
+                };
+
+
+            const excluirBtn =
+                document.createElement(
+                    'button'
+                );
+
+
+            excluirBtn.type =
+                'button';
+
+
+            excluirBtn.className =
+
+                'photo-action-btn delete-photo-btn';
+
+
+            excluirBtn.textContent =
+                '🗑️ Excluir';
+
+
+            excluirBtn.onclick =
+                ()=>{
+
+                    excluirFoto(
+                        foto.id
+                    );
+
+                };
+
+
+            actions.append(
+                editarBtn,
+                excluirBtn
+            );
+
+
+            article.append(
+                imagem,
+                caption,
+                actions
+            );
+
+
+            grid.appendChild(
+                article
+            );
+
+        }
+    );
+
+
+    if(
+        grid.children.length === 0
+    ){
+
+        const vazio =
+            document.createElement(
+                'p'
+            );
+
+
+        vazio.className =
+            'empty-state';
+
+
+        vazio.textContent =
+            'Nenhuma foto está sendo exibida no momento.';
+
+
+        grid.appendChild(
+            vazio
+        );
+
+    }
+
 }
+
+
+/* =========================================================
+   EDITAR LEGENDA
+========================================================= */
+
+function editarLegenda(
+    id,
+    legendaAtual
+){
+
+    const novaLegenda =
+        prompt(
+
+            'Edite a legenda da foto:',
+
+            legendaAtual
+
+        );
+
+
+    if(
+        novaLegenda === null
+    ){
+
+        return;
+
+    }
+
+
+    const legendas =
+        obterLegendas();
+
+
+    legendas[id] =
+        novaLegenda.trim();
+
+
+    salvarStorage(
+        STORAGE_LEGENDAS,
+        legendas
+    );
+
+
+    carregarFotos();
+
+}
+
+
+/* =========================================================
+   EXCLUIR FOTO
+========================================================= */
+
+function excluirFoto(id){
+
+    const confirmar =
+        confirm(
+
+            'Tem certeza que deseja excluir esta foto da página?'
+
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    const excluidas =
+        obterFotosExcluidas();
+
+
+    if(
+        !excluidas.includes(id)
+    ){
+
+        excluidas.push(id);
+
+    }
+
+
+    salvarStorage(
+        STORAGE_FOTOS_EXCLUIDAS,
+        excluidas
+    );
+
+
+    /*
+       Se for uma foto adicionada,
+       também removemos os dados
+       dela da lista.
+    */
+
+    let adicionadas =
+        obterFotosAdicionadas();
+
+
+    adicionadas =
+        adicionadas.filter(
+            foto =>
+            foto.id !== id
+        );
+
+
+    salvarStorage(
+        STORAGE_FOTOS,
+        adicionadas
+    );
+
+
+    carregarFotos();
+
+}
+
+
+/* =========================================================
+   ADICIONAR FOTOS
+========================================================= */
+
+function adicionarFotos(event){
+
+    const arquivos =
+        Array.from(
+            event.target.files ||
+            []
+        );
+
+
+    if(
+        arquivos.length === 0
+    ){
+        return;
+    }
+
+
+    const fotos =
+        obterFotosAdicionadas();
+
+
+    let pendentes =
+        arquivos.length;
+
+
+    arquivos.forEach(
+        arquivo=>{
+
+            if(
+                !arquivo.type.startsWith(
+                    'image/'
+                )
+            ){
+
+                pendentes--;
+
+                return;
+
+            }
+
+
+            const leitor =
+                new FileReader();
+
+
+            leitor.onload =
+                e=>{
+
+                    const id =
+
+                        'foto_' +
+
+                        Date.now() +
+
+                        '_' +
+
+                        Math.random()
+                        .toString(36)
+                        .slice(2,8);
+
+
+                    fotos.push({
+
+                        id:id,
+
+                        src:
+                            e.target.result,
+
+                        alt:
+                            arquivo.name,
+
+                        legenda:
+                            'Uma nova lembrança...'
+
+                    });
+
+
+                    pendentes--;
+
+
+                    if(
+                        pendentes <= 0
+                    ){
+
+                        salvarStorage(
+                            STORAGE_FOTOS,
+                            fotos
+                        );
+
+
+                        carregarFotos();
+
+                    }
+
+                };
+
+
+            leitor.readAsDataURL(
+                arquivo
+            );
+
+        }
+    );
+
+
+    event.target.value =
+        '';
+
+}
+
+
+/* =========================================================
+   RESTAURAR TODAS AS FOTOS
+========================================================= */
+
+/*
+   Esta função existe para facilitar caso
+   você exclua uma foto sem querer.
+
+   Para restaurar todas as fotos,
+   abra o console do navegador e use:
+
+   restaurarTodasAsFotos()
+
+*/
+
+function restaurarTodasAsFotos(){
+
+    const confirmar =
+        confirm(
+
+            'Deseja restaurar todas as fotos que foram excluídas da página?'
+
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    salvarStorage(
+        STORAGE_FOTOS_EXCLUIDAS,
+        []
+    );
+
+
+    carregarFotos();
+
+
+    alert(
+        'Fotos restauradas!'
+    );
+
+}
+
+
+/* =========================================================
+   SISTEMA DE VÍDEOS
+========================================================= */
+
+let videosTemporarios =
+    [];
+
+
+/*
+   Os vídeos são mantidos enquanto
+   a página estiver aberta.
+
+   Vídeos grandes não devem ser
+   guardados no localStorage.
+*/
+
+function inserirVideo(event){
+
+    const arquivos =
+        Array.from(
+            event.target.files ||
+            []
+        );
+
+
+    if(
+        arquivos.length === 0
+    ){
+        return;
+    }
+
+
+    arquivos.forEach(
+        arquivo=>{
+
+            if(
+                !arquivo.type.startsWith(
+                    'video/'
+                )
+            ){
+                return;
+            }
+
+
+            const id =
+
+                'video_' +
+
+                Date.now() +
+
+                '_' +
+
+                Math.random()
+                .toString(36)
+                .slice(2,8);
+
+
+            const url =
+                URL.createObjectURL(
+                    arquivo
+                );
+
+
+            videosTemporarios.push({
+
+                id:id,
+
+                nome:
+                    arquivo.name,
+
+                url:url,
+
+                type:
+                    arquivo.type
+
+            });
+
+        }
+    );
+
+
+    carregarVideos();
+
+
+    event.target.value =
+        '';
+
+}
+
+
+function carregarVideos(){
+
+    const lista =
+        document.getElementById(
+            'videoList'
+        );
+
+
+    if(!lista){
+        return;
+    }
+
+
+    lista.innerHTML =
+        '';
+
+
+    if(
+        videosTemporarios.length === 0
+    ){
+
+        const vazio =
+            document.createElement(
+                'p'
+            );
+
+
+        vazio.className =
+            'empty-state';
+
+
+        vazio.textContent =
+            'Ainda não há vídeos adicionados.';
+
+
+        lista.appendChild(
+            vazio
+        );
+
+
+        return;
+
+    }
+
+
+    videosTemporarios.forEach(
+        item=>{
+
+            const card =
+                document.createElement(
+                    'div'
+                );
+
+
+            card.className =
+                'video-card';
+
+
+            const video =
+                document.createElement(
+                    'video'
+                );
+
+
+            video.controls =
+                true;
+
+
+            video.playsInline =
+                true;
+
+
+            video.preload =
+                'metadata';
+
+
+            video.src =
+                item.url;
+
+
+            const actions =
+                document.createElement(
+                    'div'
+                );
+
+
+            actions.className =
+                'video-actions';
+
+
+            const excluir =
+                document.createElement(
+                    'button'
+                );
+
+
+            excluir.type =
+                'button';
+
+
+            excluir.className =
+                'delete-photo-btn';
+
+
+            excluir.textContent =
+                '🗑️ Excluir vídeo';
+
+
+            excluir.onclick =
+                ()=>{
+
+                    excluirVideo(
+                        item.id
+                    );
+
+                };
+
+
+            actions.appendChild(
+                excluir
+            );
+
+
+            card.append(
+                video,
+                actions
+            );
+
+
+            lista.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+function excluirVideo(id){
+
+    const confirmar =
+        confirm(
+
+            'Deseja excluir este vídeo?'
+
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    const video =
+        videosTemporarios.find(
+
+            item =>
+            item.id === id
+
+        );
+
+
+    if(
+        video &&
+        video.url
+    ){
+
+        URL.revokeObjectURL(
+            video.url
+        );
+
+    }
+
+
+    videosTemporarios =
+        videosTemporarios.filter(
+
+            item =>
+            item.id !== id
+
+        );
+
+
+    carregarVideos();
+
+}
+
+
+/* =========================================================
+   TEXTOS
+========================================================= */
+
+function toggleTextoForm(){
+
+    const form =
+        document.getElementById(
+            'textoForm'
+        );
+
+
+    if(form){
+
+        form
+        .classList
+        .toggle('open');
+
+    }
+
+}
+
+
+function obterTextos(){
+
+    return obterStorage(
+        STORAGE_TEXTOS,
+        []
+    );
+
+}
+
+
 function carregarTextos(){
- const list=document.getElementById("textList"),empty=document.getElementById("textEmpty");
- const itens=lerTextos();list.innerHTML="";
- itens.forEach((item,i)=>{
-   const card=document.createElement("article");card.className="text-card";
-   const h=document.createElement("h3");h.textContent=item.titulo||"Uma lembrança";
-   const p=document.createElement("p");p.textContent=item.conteudo;
-   const small=document.createElement("small");small.textContent=item.data||"";
-   const edit=document.createElement("button");edit.className="edit-btn";edit.textContent="✏️ Editar";edit.onclick=()=>editarTexto(i);
-   const del=document.createElement("button");del.className="delete-btn";del.textContent="🗑️ Remover";del.onclick=()=>removerTexto(i);
-   card.append(h,p,small,edit,del);list.appendChild(card);
- });
- empty.style.display=itens.length?"none":"block";
+
+    const list =
+        document.getElementById(
+            'textList'
+        );
+
+
+    const empty =
+        document.getElementById(
+            'textEmpty'
+        );
+
+
+    if(!list){
+        return;
+    }
+
+
+    const itens =
+        obterTextos();
+
+
+    list.innerHTML =
+        '';
+
+
+    itens.forEach(
+        item=>{
+
+            const card =
+                document.createElement(
+                    'article'
+                );
+
+
+            card.className =
+                'text-card';
+
+
+            const h =
+                document.createElement(
+                    'h3'
+                );
+
+
+            h.textContent =
+                item.titulo ||
+                'Uma lembrança';
+
+
+            const p =
+                document.createElement(
+                    'p'
+                );
+
+
+            p.textContent =
+                item.conteudo;
+
+
+            const small =
+                document.createElement(
+                    'small'
+                );
+
+
+            small.textContent =
+                item.data ||
+                '';
+
+
+            const actions =
+                document.createElement(
+                    'div'
+                );
+
+
+            actions.className =
+                'text-card-actions';
+
+
+            const editar =
+                document.createElement(
+                    'button'
+                );
+
+
+            editar.type =
+                'button';
+
+
+            editar.textContent =
+                '✏️ Editar';
+
+
+            editar.onclick =
+                ()=>{
+
+                    editarTexto(
+                        item.id
+                    );
+
+                };
+
+
+            const excluir =
+                document.createElement(
+                    'button'
+                );
+
+
+            excluir.type =
+                'button';
+
+
+            excluir.className =
+                'delete-photo-btn';
+
+
+            excluir.textContent =
+                '🗑️ Excluir';
+
+
+            excluir.onclick =
+                ()=>{
+
+                    excluirTexto(
+                        item.id
+                    );
+
+                };
+
+
+            actions.append(
+                editar,
+                excluir
+            );
+
+
+            card.append(
+                h,
+                p,
+                small,
+                actions
+            );
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    if(empty){
+
+        empty.style.display =
+
+            itens.length
+
+            ? 'none'
+
+            : 'block';
+
+    }
+
 }
 
-/* Swipe mobile */
-(()=>{let x=0,y=0,t=0;
- document.addEventListener("touchstart",e=>{if(e.touches.length!==1)return;const a=e.target;if(a.closest("button,input,a,iframe,video,.lightbox"))return;x=e.touches[0].clientX;y=e.touches[0].clientY;t=Date.now()},{passive:true});
- document.addEventListener("touchend",e=>{if(e.changedTouches.length!==1)return;const a=e.target;if(a.closest("button,input,a,iframe,video,.lightbox"))return;const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;if(Date.now()-t>650)return;if(Math.abs(dx)<65||Math.abs(dx)<Math.abs(dy)*1.35)return;if(dx<0&&paginaAtual<totalPaginas)mudarPagina(1);if(dx>0&&paginaAtual>1)mudarPagina(-1)},{passive:true});
+
+function salvarTexto(){
+
+    const titulo =
+        document.getElementById(
+            'textoTitulo'
+        );
+
+
+    const conteudo =
+        document.getElementById(
+            'textoConteudo'
+        );
+
+
+    if(
+        !conteudo ||
+        !conteudo.value.trim()
+    ){
+
+        alert(
+            'Escreva algum texto antes de salvar.'
+        );
+
+
+        return;
+
+    }
+
+
+    const itens =
+        obterTextos();
+
+
+    itens.unshift({
+
+        id:
+
+            'texto_' +
+
+            Date.now() +
+
+            '_' +
+
+            Math.random()
+            .toString(36)
+            .slice(2,7),
+
+
+        titulo:
+            titulo.value.trim(),
+
+
+        conteudo:
+            conteudo.value.trim(),
+
+
+        data:
+            new Date()
+            .toLocaleDateString(
+                'pt-BR'
+            )
+
+    });
+
+
+    salvarStorage(
+        STORAGE_TEXTOS,
+        itens
+    );
+
+
+    titulo.value =
+        '';
+
+
+    conteudo.value =
+        '';
+
+
+    const form =
+        document.getElementById(
+            'textoForm'
+        );
+
+
+    if(
+        form &&
+        form.classList.contains('open')
+    ){
+
+        form
+        .classList
+        .remove('open');
+
+    }
+
+
+    carregarTextos();
+
+}
+
+
+function editarTexto(id){
+
+    const itens =
+        obterTextos();
+
+
+    const item =
+        itens.find(
+
+            texto =>
+            texto.id === id
+
+        );
+
+
+    if(!item){
+        return;
+    }
+
+
+    const novoTitulo =
+        prompt(
+
+            'Título:',
+
+            item.titulo
+
+        );
+
+
+    if(
+        novoTitulo === null
+    ){
+        return;
+    }
+
+
+    const novoConteudo =
+        prompt(
+
+            'Edite o texto:',
+
+            item.conteudo
+
+        );
+
+
+    if(
+        novoConteudo === null
+    ){
+        return;
+    }
+
+
+    item.titulo =
+        novoTitulo.trim();
+
+
+    item.conteudo =
+        novoConteudo.trim();
+
+
+    salvarStorage(
+        STORAGE_TEXTOS,
+        itens
+    );
+
+
+    carregarTextos();
+
+}
+
+
+function excluirTexto(id){
+
+    const confirmar =
+        confirm(
+
+            'Deseja excluir este texto?'
+
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    let itens =
+        obterTextos();
+
+
+    itens =
+        itens.filter(
+
+            item =>
+            item.id !== id
+
+        );
+
+
+    salvarStorage(
+        STORAGE_TEXTOS,
+        itens
+    );
+
+
+    carregarTextos();
+
+}
+
+
+/* =========================================================
+   SWIPE NO CELULAR
+========================================================= */
+
+(function(){
+
+    let inicioX =
+        0;
+
+
+    let inicioY =
+        0;
+
+
+    let inicioTempo =
+        0;
+
+
+    document.addEventListener(
+
+        'touchstart',
+
+        function(e){
+
+            if(
+
+                !e.touches ||
+
+                e.touches.length !== 1
+
+            ){
+                return;
+            }
+
+
+            const alvo =
+                e.target;
+
+
+            if(
+
+                alvo.closest(
+
+                    'button,input,textarea,a,iframe,video,.lightbox'
+
+                )
+
+            ){
+                return;
+            }
+
+
+            inicioX =
+                e.touches[0].clientX;
+
+
+            inicioY =
+                e.touches[0].clientY;
+
+
+            inicioTempo =
+                Date.now();
+
+        },
+
+        {
+            passive:true
+        }
+
+    );
+
+
+    document.addEventListener(
+
+        'touchend',
+
+        function(e){
+
+            if(
+
+                !e.changedTouches ||
+
+                e.changedTouches.length !== 1
+
+            ){
+                return;
+            }
+
+
+            const alvo =
+                e.target;
+
+
+            if(
+
+                alvo.closest(
+
+                    'button,input,textarea,a,iframe,video,.lightbox'
+
+                )
+
+            ){
+                return;
+            }
+
+
+            const dx =
+
+                e.changedTouches[0].clientX -
+
+                inicioX;
+
+
+            const dy =
+
+                e.changedTouches[0].clientY -
+
+                inicioY;
+
+
+            const duracao =
+
+                Date.now() -
+
+                inicioTempo;
+
+
+            if(
+                duracao > 650
+            ){
+                return;
+            }
+
+
+            if(
+
+                Math.abs(dx) < 65 ||
+
+                Math.abs(dx) <
+
+                Math.abs(dy) * 1.35
+
+            ){
+                return;
+            }
+
+
+            if(
+
+                typeof mudarPagina ===
+
+                'function'
+
+            ){
+
+                if(
+
+                    dx < 0 &&
+
+                    paginaAtual <
+
+                    totalPaginas
+
+                ){
+
+                    mudarPagina(1);
+
+                }
+
+
+                if(
+
+                    dx > 0 &&
+
+                    paginaAtual > 1
+
+                ){
+
+                    mudarPagina(-1);
+
+                }
+
+            }
+
+        },
+
+        {
+            passive:true
+        }
+
+    );
+
 })();
 
-/* Inicialização */
+
+/* =========================================================
+   GESTOS IPHONE
+========================================================= */
+
+document.addEventListener(
+
+    'gesturestart',
+
+    e =>
+    e.preventDefault(),
+
+    {
+        passive:false
+    }
+
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+carregarFotos();
+
+carregarVideos();
+
 carregarTextos();
-carregarMidias();
+
 </script>
+
 </body>
 </html>
