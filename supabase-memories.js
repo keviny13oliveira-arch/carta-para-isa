@@ -97,6 +97,36 @@ const SUPABASE_PUBLIC_KEY = 'sb_publishable_mVmLJLRskPluXZwqIUDtew_tBiTYlmD';
     }
   }
 
+  async function updateMediaCaption(id, caption) {
+    return api(MEDIA_TABLE + '?id=eq.' + encodeURIComponent(id), {
+      method: 'PATCH',
+      headers: { Prefer: 'return=representation' },
+      body: JSON.stringify({ caption: caption || null })
+    });
+  }
+
+  async function removeStorage(path) {
+    if (!path) return null;
+    const response = await fetch(SUPABASE_URL + '/storage/v1/object/' + STORAGE_BUCKET + '/' + path.split('/').map(encodeURIComponent).join('/'), {
+      method: 'DELETE',
+      headers: {
+        apikey: SUPABASE_PUBLIC_KEY,
+        Authorization: 'Bearer ' + SUPABASE_PUBLIC_KEY
+      }
+    });
+    if (!response.ok && response.status !== 404) throw new Error(await response.text());
+    return null;
+  }
+
+  async function deleteMedia(id, storagePath) {
+    await api(MEDIA_TABLE + '?id=eq.' + encodeURIComponent(id), { method: 'DELETE' });
+    try {
+      await removeStorage(storagePath);
+    } catch (error) {
+      console.warn('Registro excluído, mas não foi possível apagar o arquivo do Storage:', error);
+    }
+  }
+
   async function loadMedia() {
     const rows = await api(MEDIA_TABLE + '?select=*&order=created_at.asc');
     return (rows || []).map(function (item) {
@@ -125,6 +155,8 @@ const SUPABASE_PUBLIC_KEY = 'sb_publishable_mVmLJLRskPluXZwqIUDtew_tBiTYlmD';
     deleteText,
     savePhoto,
     saveVideo,
+    updateMediaCaption,
+    deleteMedia,
     loadMedia
   };
   init();
