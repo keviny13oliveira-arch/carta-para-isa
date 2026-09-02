@@ -1507,6 +1507,28 @@ html body:not(.estrelado) .page-indicator{
 .text-card-content.expanded{display:block !important;}
 </style>
 
+<style>
+/* CORRECAO TEXTOS RETRATEIS v2 */
+.text-card-content{
+  display:none !important;
+  width:100%;
+  margin-top:12px !important;
+}
+.text-card-content.expanded{
+  display:block !important;
+}
+.text-card-actions{
+  display:flex !important;
+  gap:8px !important;
+  flex-wrap:wrap !important;
+  margin-top:12px !important;
+}
+.show-text-btn{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+</style>
 </head>
 
 <body>
@@ -3946,6 +3968,14 @@ function carregarTextos(){
                 editar,
                 excluir
             );
+
+            h.style.cursor = 'pointer';
+
+            h.title =
+                'Clique para exibir ou ocultar';
+
+            h.onclick =
+                ()=> exibir.click();
 
             card.append(
                 h,
