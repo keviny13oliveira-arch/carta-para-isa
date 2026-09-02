@@ -630,8 +630,65 @@ h2{
 }
 
 .text-card h3{
-    margin-bottom:7px;
+    margin-bottom:0;
     font-family:'Playfair Display',serif;
+}
+
+.text-card-title{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding:0;
+    margin:0;
+    background:transparent;
+    border:0;
+    box-shadow:none;
+    color:inherit;
+    text-align:left;
+    cursor:pointer;
+}
+
+.text-card-title:hover{
+    transform:none;
+    box-shadow:none;
+    filter:brightness(1.08);
+}
+
+.text-card-title h3{
+    margin:0;
+    flex:1;
+}
+
+.text-toggle-icon{
+    flex:0 0 auto;
+    font-size:.82rem;
+    opacity:.8;
+    transition:transform .22s ease;
+}
+
+.text-card.open .text-toggle-icon{
+    transform:rotate(180deg);
+}
+
+.text-card-content{
+    display:none;
+    margin-top:12px;
+    animation:revealText .22s ease;
+}
+
+.text-card.open .text-card-content{
+    display:block;
+}
+
+.text-card .text-card-content p{
+    margin-top:0;
+}
+
+@keyframes revealText{
+    from{opacity:0;transform:translateY(-5px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
 .text-card p{
@@ -3275,15 +3332,59 @@ function carregarTextos(){
                 'text-card';
 
 
-            const h =
+            const titleButton =
+                document.createElement(
+                    'button'
+                );
+
+
+            titleButton.type =
+                'button';
+
+
+            titleButton.className =
+                'text-card-title';
+
+
+            const title =
                 document.createElement(
                     'h3'
                 );
 
 
-            h.textContent =
+            title.textContent =
                 item.titulo ||
                 'Uma lembrança';
+
+
+            const toggleIcon =
+                document.createElement(
+                    'span'
+                );
+
+
+            toggleIcon.className =
+                'text-toggle-icon';
+
+
+            toggleIcon.textContent =
+                '⌄';
+
+
+            titleButton.append(
+                title,
+                toggleIcon
+            );
+
+
+            const content =
+                document.createElement(
+                    'div'
+                );
+
+
+            content.className =
+                'text-card-content';
 
 
             const p =
@@ -3305,6 +3406,22 @@ function carregarTextos(){
             small.textContent =
                 item.data ||
                 '';
+
+
+            content.append(
+                p,
+                small
+            );
+
+
+            titleButton.onclick =
+                ()=>{
+
+                    card.classList.toggle(
+                        'open'
+                    );
+
+                };
 
 
             const actions =
@@ -3376,9 +3493,8 @@ function carregarTextos(){
 
 
             card.append(
-                h,
-                p,
-                small,
+                titleButton,
+                content,
                 actions
             );
 
