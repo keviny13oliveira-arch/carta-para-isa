@@ -1473,6 +1473,40 @@ body.estrelado .memories-head h2{
 </style>
 <script src="supabase-memories.js"></script>
 <script src="cloud-bridge.js"></script>
+
+<!-- FORCAR DESIGN BRANCO DEFINITIVO -->
+<style>
+/* Camada final aplicada diretamente ao index publicado */
+html body:not(.estrelado) .pages-wrapper{
+  background:#fff !important;
+  background-image:none !important;
+  border:8px solid #fff !important;
+  border-radius:30px !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+html body:not(.estrelado) .page{
+  background:#fff !important;
+  color:#5b2932 !important;
+}
+html body:not(.estrelado) .page h2,
+html body:not(.estrelado) .memories-head h2{
+  color:#9d1f38 !important;
+}
+html body:not(.estrelado) .frase,
+html body:not(.estrelado) .story,
+html body:not(.estrelado) #carta,
+html body:not(.estrelado) #motivo,
+html body:not(.estrelado) .final-quote,
+html body:not(.estrelado) .memories-head p,
+html body:not(.estrelado) .page-indicator{
+  color:#5b2932 !important;
+}
+/* Textos recolhíveis */
+.text-card-content{display:none !important;}
+.text-card-content.expanded{display:block !important;}
+</style>
+
 </head>
 
 <body>
