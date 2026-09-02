@@ -2,7 +2,8 @@ name: Publicar carta no GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: github-pages
   cancel-in-progress: true
 
 jobs:
@@ -20,24 +21,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Baixar o repositório
+      - name: Baixar a versão atual do site
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Remover título da área de fotos
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          path = Path("Para_Minha_Futura_Esposa_v5_Safari_Nuvem.html")
-          text = path.read_text(encoding="utf-8")
-          text = text.replace("<h3>📷 Nossas fotos</h3>", "")
-          path.write_text(text, encoding="utf-8")
-          PY
-
-      - name: Preparar arquivos do site
+      - name: Preparar o site atual
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
