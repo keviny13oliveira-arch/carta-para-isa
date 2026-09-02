@@ -1978,11 +1978,27 @@ let paginaAtual =
 const totalPaginas = 7;
 
 
-function irParaPagina(indice){
-    const destino = indice + 1;
+let navegandoEntrePaginas =
+    false;
 
-    if(destino < 1 || destino > totalPaginas) return;
-    if(destino === paginaAtual) return;
+
+function irParaPagina(indice){
+
+    if(navegandoEntrePaginas){
+        return;
+    }
+
+    const destino =
+        indice + 1;
+
+    if(destino < 1 ||
+       destino > totalPaginas ||
+       destino === paginaAtual){
+        return;
+    }
+
+    navegandoEntrePaginas =
+        true;
 
     const paginaAntiga =
         document.getElementById(
@@ -1994,30 +2010,57 @@ function irParaPagina(indice){
             `p${destino}`
         );
 
+    if(!paginaNova){
+        navegandoEntrePaginas =
+            false;
+        return;
+    }
+
     if(paginaAntiga){
-        paginaAntiga.classList.remove('active');
+        paginaAntiga.classList.remove(
+            'active'
+        );
     }
 
-    paginaAtual = destino;
+    paginaAtual =
+        destino;
 
-    if(paginaNova){
-        paginaNova.classList.add('active');
-    }
+    paginaNova.classList.add(
+        'active'
+    );
 
     atualizarNavegacao();
+
+    window.setTimeout(
+        ()=>{
+            navegandoEntrePaginas =
+                false;
+        },
+        180
+    );
 }
 
 function atualizarNavegacao(){
 
-    document.getElementById(
-        'prevBtn'
-    ).disabled =
-        paginaAtual === 1;
+    const prevBtn =
+        document.getElementById(
+            'prevBtn'
+        );
 
-    document.getElementById(
-        'nextBtn'
-    ).disabled =
-        paginaAtual === totalPaginas;
+    const nextBtn =
+        document.getElementById(
+            'nextBtn'
+        );
+
+    if(prevBtn){
+        prevBtn.disabled =
+            paginaAtual === 1;
+    }
+
+    if(nextBtn){
+        nextBtn.disabled =
+            paginaAtual === totalPaginas;
+    }
 
     const indicador =
         document.getElementById(
@@ -2052,6 +2095,18 @@ function mudarPagina(direcao){
     irParaPagina(
         destino - 1
     );
+}
+
+
+/* INICIALIZA NAVEGAÇÃO */
+if(document.readyState === 'loading'){
+    document.addEventListener(
+        'DOMContentLoaded',
+        atualizarNavegacao,
+        { once:true }
+    );
+}else{
+    atualizarNavegacao();
 }
 
 
