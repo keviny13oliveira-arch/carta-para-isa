@@ -2063,7 +2063,7 @@ function mudarPagina(direcao){
     `Página ${paginaAtual} de ${totalPaginas}`;
 
     document.querySelectorAll('.chapter-item').forEach((item,index)=>{
-        item.classList.toggle('active',index === paginaAtual);
+        item.classList.toggle('active',index === paginaAtual - 1);
     });
 }
 
