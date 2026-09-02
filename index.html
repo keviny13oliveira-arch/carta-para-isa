@@ -1127,26 +1127,32 @@ h2{
 }
 
 
-/* CORREÇÃO DE LEITURA SEM BLOQUEAR A ROLAGEM */
+/* CORREÇÃO DE LEITURA DAS PÁGINAS 2 E 3 */
 #p2,
 #p3{
-    overflow-anchor:none;
-    align-content:start;
+    justify-content:flex-start;
+    align-items:center;
+    padding-top:38px;
+    scroll-padding-top:38px;
 }
 
-#p2 h2,
-#p3 h2,
-#p2 .story-box,
-#p3 .story-box{
-    overflow-anchor:none;
+#p2 > h2,
+#p3 .story-box > h2{
+    flex:0 0 auto;
+    margin-top:0;
+}
+
+#p2 > button,
+#p3 .story-box > div{
+    flex:0 0 auto;
 }
 
 #carta,
 #historiaTexto{
     overflow-anchor:none;
     white-space:pre-wrap;
-}
-</style>
+    flex:0 0 auto;
+}</style>
 
 <script src="supabase-memories.js"></script>
 <script src="cloud-bridge.js"></script>
