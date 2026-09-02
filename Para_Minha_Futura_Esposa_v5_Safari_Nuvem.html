@@ -879,6 +879,74 @@ h2{
 
 }
 
+
+/* =========================
+   AJUSTE DA PÁGINA 4
+   Inspirado no visual delicado
+   da referência enviada
+========================= */
+
+#p4{
+    justify-content:flex-start;
+    align-items:center;
+    padding-top:30px;
+    padding-bottom:34px;
+}
+
+#p4 h2{
+    width:100%;
+    max-width:620px;
+    position:sticky;
+    top:0;
+    z-index:5;
+    margin:0 0 16px;
+    padding:8px 12px 14px;
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.45rem,4vw,2rem);
+    background:linear-gradient(
+        to bottom,
+        rgba(255,143,177,.96) 0%,
+        rgba(255,143,177,.86) 72%,
+        rgba(255,143,177,0) 100%
+    );
+    text-shadow:0 2px 8px rgba(123,35,65,.18);
+}
+
+#p4 .motivos-lista{
+    margin-top:0;
+    padding-bottom:10px;
+}
+
+#p4 .motivos-lista li{
+    background:rgba(255,255,255,.16);
+    border-color:rgba(255,255,255,.28);
+    box-shadow:0 6px 18px rgba(100,20,45,.10);
+}
+
+@media(max-width:640px){
+
+    #p4{
+        padding-top:18px;
+        padding-bottom:28px;
+    }
+
+    #p4 h2{
+        margin-bottom:10px;
+        padding:7px 6px 12px;
+        font-size:1.4rem;
+    }
+
+    #p4 .motivos-lista{
+        gap:8px;
+    }
+
+    #p4 .motivos-lista li{
+        padding:10px 12px 10px 39px;
+        font-size:.9rem;
+    }
+
+}
+
 </style>
 </head>
 
@@ -1055,7 +1123,7 @@ h2{
     class="page"
     id="p4">
 
-    <h2>
+    <h2 class="motivos-titulo">
         🌹 Algumas coisas que amo em você
     </h2>
 
