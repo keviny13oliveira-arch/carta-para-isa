@@ -1635,7 +1635,7 @@ h2{
         </button>
         <button class="chapter-item" onclick="irParaPagina(2)" aria-label="Realidade">
             <span class="chapter-number">3</span>
-            <span class="chapter-name">Realidade</span>
+            <span class="chapter-name">Começo</span>
         </button>
         <button class="chapter-item" onclick="irParaPagina(3)" aria-label="Detalhes">
             <span class="chapter-number">4</span>
@@ -1643,11 +1643,11 @@ h2{
         </button>
         <button class="chapter-item" onclick="irParaPagina(4)" aria-label="Desejo">
             <span class="chapter-number">5</span>
-            <span class="chapter-name">Desejo</span>
+            <span class="chapter-name">Momentos</span>
         </button>
         <button class="chapter-item" onclick="irParaPagina(5)" aria-label="Memórias">
             <span class="chapter-number">6</span>
-            <span class="chapter-name">Memórias</span>
+            <span class="chapter-name">Textos</span>
         </button>
         <button class="chapter-item" onclick="irParaPagina(6)" aria-label="Final">
             <span class="chapter-number">7</span>
@@ -1979,92 +1979,79 @@ const totalPaginas = 7;
 
 
 function irParaPagina(indice){
-    if(indice === paginaAtual) return;
-    const direcao = indice > paginaAtual ? 1 : -1;
-    while(paginaAtual !== indice){
-        mudarPagina(direcao);
-    }
-}
+    const destino = indice + 1;
 
-function mudarPagina(direcao){
+    if(destino < 1 || destino > totalPaginas) return;
+    if(destino === paginaAtual) return;
 
     const paginaAntiga =
         document.getElementById(
             `p${paginaAtual}`
         );
 
-
-    paginaAtual +=
-        direcao;
-
-
-    if(paginaAtual < 1){
-
-        paginaAtual =
-            1;
-
-    }
-
-
-    if(paginaAtual > totalPaginas){
-
-        paginaAtual =
-            totalPaginas;
-
-    }
-
-
     const paginaNova =
         document.getElementById(
-            `p${paginaAtual}`
+            `p${destino}`
         );
 
-
     if(paginaAntiga){
-
-        paginaAntiga
-        .classList
-        .remove('active');
-
+        paginaAntiga.classList.remove('active');
     }
 
+    paginaAtual = destino;
 
     if(paginaNova){
-
-        paginaNova
-        .classList
-        .add('active');
-
+        paginaNova.classList.add('active');
     }
 
+    atualizarNavegacao();
+}
 
-    document
-    .getElementById(
+function atualizarNavegacao(){
+
+    document.getElementById(
         'prevBtn'
-    )
-    .disabled =
+    ).disabled =
         paginaAtual === 1;
 
-
-    document
-    .getElementById(
+    document.getElementById(
         'nextBtn'
-    )
-    .disabled =
+    ).disabled =
         paginaAtual === totalPaginas;
 
+    const indicador =
+        document.getElementById(
+            'pageIndicator'
+        );
 
-    document
-    .getElementById(
-        'pageIndicator'
-    )
-    .textContent =
+    if(indicador){
+        indicador.textContent =
+            `Página ${paginaAtual} de ${totalPaginas}`;
+    }
 
-    `Página ${paginaAtual} de ${totalPaginas}`;
-
-    document.querySelectorAll('.chapter-item').forEach((item,index)=>{
-        item.classList.toggle('active',index === paginaAtual - 1);
+    document.querySelectorAll(
+        '.chapter-item'
+    ).forEach((item,index)=>{
+        item.classList.toggle(
+            'active',
+            index === paginaAtual - 1
+        );
     });
+}
+
+function mudarPagina(direcao){
+
+    const destino =
+        paginaAtual + direcao;
+
+    if(destino < 1 ||
+       destino > totalPaginas){
+        return;
+    }
+
+    irParaPagina(
+        destino - 1
+    );
 }
 
 
