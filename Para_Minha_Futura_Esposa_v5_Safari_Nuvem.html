@@ -258,6 +258,36 @@ h2{
     font-weight:600;
 }
 
+.motivos-lista{
+    width:100%;
+    max-width:620px;
+    margin:8px auto 0;
+    padding:0;
+    list-style:none;
+    display:grid;
+    gap:10px;
+    text-align:left;
+}
+
+.motivos-lista li{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:14px;
+    padding:12px 16px 12px 42px;
+    position:relative;
+    line-height:1.55;
+    font-size:clamp(.95rem,2.2vw,1.08rem);
+}
+
+.motivos-lista li::before{
+    content:"🌹";
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+
 .hidden{
     display:none;
 }
@@ -932,7 +962,7 @@ h2{
     id="p1">
 
     <h1 id="tituloSecreto">
-        🌸 Isadora
+        Isadora
     </h1>
 
     <p class="frase">
@@ -1029,58 +1059,26 @@ h2{
         🌹 Algumas coisas que amo em você
     </h2>
 
-    <button onclick="mostrarMotivo()">
-        🌹 Descobrir
-    </button>
-
-    <p id="motivo"></p>
+    <ul class="motivos-lista">
+        <li>Seu humor MUITO duvidoso</li>
+        <li>Seu jeitinho de cuidar de mim</li>
+        <li>As nossas conversas</li>
+        <li>O seu jeito de demonstrar carinho</li>
+        <li>Sua conexão imediata comigo</li>
+        <li>O fato de você ser você</li>
+    </ul>
 
 </div>
 
 
 <!-- =========================
      PÁGINA 5
-========================= -->
-
-<div
-    class="page"
-    id="p5">
-
-    <h2>
-        🔒 Maior verdade
-    </h2>
-
-    <button onclick="abrirSegredo()">
-        Não clique aqui
-    </button>
-
-    <div
-        class="hidden"
-        id="mensagemSecreta">
-
-        A maior prova da minha sorte é ter você, o que mais penso para meu futuro é você, sempre, sempre ao meu lado.
-
-    </div>
-
-    <div
-        class="hidden"
-        id="segredo">
-
-        A maior prova da minha sorte é ter você, o que mais penso para meu futuro é você, sempre, sempre ao meu lado.
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     PÁGINA 6
      FOTOS E VÍDEOS
 ========================= -->
 
 <div
     class="page memories-page"
-    id="p6">
+    id="p5">
 
     <div class="memories-head">
 
@@ -1203,7 +1201,7 @@ h2{
 
 <div
     class="page memories-page"
-    id="p7">
+    id="p6">
 
     <div class="memories-head">
 
@@ -1304,12 +1302,12 @@ h2{
 
 
 <!-- =========================
-     PÁGINA 8
+     PÁGINA 7
 ========================= -->
 
 <div
     class="page"
-    id="p8">
+    id="p7">
 
     <div class="final-quote">
 
@@ -1378,7 +1376,7 @@ h2{
         class="page-indicator"
         id="pageIndicator">
 
-        Página 1 de 8
+        Página 1 de 7
 
     </span>
 
@@ -1703,8 +1701,7 @@ let paginaAtual =
     1;
 
 
-const totalPaginas =
-    8;
+const totalPaginas = 7;
 
 
 function mudarPagina(direcao){
@@ -1943,45 +1940,6 @@ function abrirHistoria(){
 
 
     digitarHistoria();
-
-}
-
-
-/* =========================================================
-   MOTIVOS
-========================================================= */
-
-const motivos = [
-
-    'Seu humor MUITO duvidoso',
-
-    'Seu jeitinho de cuidar de mim',
-
-    'As nossas conversas',
-
-    'O seu jeito de demonstrar carinho',
-
-    'Sua conexão imediata comigo',
-
-    'O fato de você ser você'
-
-];
-
-
-function mostrarMotivo(){
-
-    document
-    .getElementById(
-        'motivo'
-    )
-    .innerHTML =
-
-    motivos[
-        Math.floor(
-            Math.random() *
-            motivos.length
-        )
-    ];
 
 }
 
