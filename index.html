@@ -31,201 +31,505 @@
 
 
 
-<style>
-/* NOVO DESIGN LIVRO CAPA E CAPITULOS v1 */
 
-/* Estrutura geral do novo livro */
+<style>
+/* DESIGN CADERNO ROMÂNTICO v2 */
+
+/* Fundo geral */
+html,body{min-height:100%;}
+
+body{
+  background:
+    radial-gradient(circle at 12% 84%,rgba(255,215,220,.20),transparent 18%),
+    radial-gradient(circle at 88% 18%,rgba(255,230,233,.18),transparent 22%),
+    linear-gradient(135deg,#7e1229 0%,#b32140 42%,#8f1730 100%) !important;
+}
+
+/* Livro aberto */
 .book-container{
-  width:min(1080px,96%);
-  height:min(720px,88dvh);
-  position:relative;
-  padding-right:170px;
+  width:min(1420px,97vw) !important;
+  height:min(900px,92dvh) !important;
+  max-height:92dvh !important;
+  padding:0 0 0 330px !important;
+  position:relative !important;
+  z-index:2;
 }
 
 .pages-wrapper{
-  background:rgba(255,255,255,.14);
-  border-radius:10px 22px 22px 10px;
-  box-shadow:
-    0 28px 60px rgba(0,0,0,.28),
-    inset 12px 0 20px rgba(0,0,0,.08);
-  overflow:hidden;
-}
-
-/* CAPA */
-#p1.hero{
+  position:relative !important;
+  height:100% !important;
   background:
-    radial-gradient(circle at 80% 18%,rgba(255,255,255,.14),transparent 28%),
-    linear-gradient(135deg,#9f183d,#d93f68 48%,#7d1231);
-  border:8px solid rgba(255,224,230,.22);
-  box-shadow:inset 0 0 0 2px rgba(255,255,255,.12);
-  justify-content:center;
-  overflow:hidden;
+    radial-gradient(circle at 8% 15%,rgba(180,55,60,.05),transparent 23%),
+    linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,248,244,.98)) !important;
+  border:7px solid rgba(255,255,255,.52) !important;
+  border-radius:28px !important;
+  box-shadow:
+    0 30px 80px rgba(38,4,12,.42),
+    inset 16px 0 28px rgba(109,38,38,.08),
+    inset -2px 0 0 rgba(120,40,40,.08) !important;
+  overflow:hidden !important;
 }
 
-#p1.hero::before{
+/* Textura de papel */
+.pages-wrapper::before{
   content:"";
   position:absolute;
-  inset:18px;
-  border:1px solid rgba(255,255,255,.32);
-  border-radius:8px;
+  inset:0;
+  pointer-events:none;
+  opacity:.38;
+  background-image:
+    radial-gradient(rgba(145,55,55,.12) .7px,transparent .8px),
+    linear-gradient(90deg,transparent 0 97%,rgba(145,55,55,.035) 100%);
+  background-size:7px 7px,100% 100%;
+  mix-blend-mode:multiply;
+  z-index:1;
+}
+
+/* Espiral central */
+.pages-wrapper::after{
+  content:"";
+  position:absolute;
+  left:-25px;
+  top:5%;
+  width:42px;
+  height:90%;
+  pointer-events:none;
+  z-index:30;
+  background:
+    radial-gradient(ellipse at center,transparent 42%,#4a1d1b 44% 51%,#8b4a38 53% 60%,transparent 62%) center top/42px 58px repeat-y;
+  filter:drop-shadow(2px 2px 1px rgba(0,0,0,.28));
+}
+
+/* Páginas */
+.page{
+  z-index:2;
+  background:transparent !important;
+  color:#4b292b !important;
+  padding:58px clamp(34px,6vw,92px) 54px !important;
+}
+
+.page h2,
+.memories-head h2,
+.motivos-titulo{
+  font-family:'Playfair Display',serif !important;
+  color:#8e1f32 !important;
+  text-shadow:none !important;
+}
+
+.page h2{
+  font-size:clamp(2rem,4vw,3.45rem) !important;
+  margin-bottom:22px !important;
+}
+
+.frase,.story,#carta,#motivo,.final-quote,
+.memories-head p,.page p,.page li{
+  color:#4b292b !important;
+}
+
+/* =========================
+   BARRA LATERAL / CAPA
+========================= */
+.chapter-nav{
+  position:absolute !important;
+  left:0 !important;
+  top:0 !important;
+  right:auto !important;
+  bottom:auto !important;
+  transform:none !important;
+  width:315px !important;
+  height:100% !important;
+  max-height:none !important;
+  overflow-y:auto !important;
+  padding:34px 24px 28px 42px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:8px !important;
+  border-radius:28px 0 0 28px !important;
+  background:
+    radial-gradient(circle at 25% 16%,rgba(255,255,255,.48),transparent 18%),
+    linear-gradient(135deg,#fff8f4,#f5ded9 54%,#edd0cb) !important;
+  border:6px solid rgba(255,255,255,.42) !important;
+  box-shadow:
+    0 24px 70px rgba(44,5,14,.28),
+    inset -10px 0 25px rgba(104,32,35,.10) !important;
+  z-index:60 !important;
+}
+
+.chapter-nav::before{
+  content:"";
+  position:absolute;
+  top:0;
+  right:-10px;
+  width:18px;
+  height:100%;
+  background:linear-gradient(90deg,rgba(83,25,23,.20),rgba(255,255,255,.1),transparent);
   pointer-events:none;
 }
 
-#p1.hero::after{
-  content:"Para minha futura esposa";
+.chapter-cover{
+  position:relative;
+  text-align:center;
+  padding:24px 12px 16px;
+  margin-bottom:10px;
+  border-bottom:1px solid rgba(142,31,50,.22);
+}
+
+.chapter-cover::before{
+  content:"🎀";
+  position:absolute;
+  top:-20px;
+  left:-18px;
+  font-size:3.1rem;
+  filter:drop-shadow(2px 3px 3px rgba(0,0,0,.16));
+}
+
+.chapter-cover-title{
+  font-family:'Dancing Script',cursive;
+  color:#861b30;
+  font-size:clamp(2rem,3vw,3rem);
+  line-height:1.05;
+}
+
+.chapter-cover-subtitle{
+  font-family:'Playfair Display',serif;
+  color:#6c3a3d;
+  font-style:italic;
+  font-size:.92rem;
+  margin:9px 0 16px;
+}
+
+.cover-read-btn{
+  width:100%;
+  margin:0;
+  padding:12px 14px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#a91e39,#7d1228) !important;
+  color:#fff !important;
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  box-shadow:0 8px 18px rgba(121,18,40,.25);
+}
+
+.chapter-nav-title{display:none !important;}
+
+.chapter-btn{
+  width:100% !important;
+  min-height:52px;
+  margin:0 !important;
+  padding:8px 10px 8px 16px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  text-align:left !important;
+  border-radius:15px !important;
+  background:transparent !important;
+  color:#603337 !important;
+  border:1px solid transparent !important;
+  box-shadow:none !important;
+  font-size:.9rem !important;
+  transform:none !important;
+}
+
+.chapter-btn::before{
+  content:attr(data-icon);
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(160,34,58,.08);
+  color:#941f36;
+  font-size:1rem;
+}
+
+.chapter-btn:hover{
+  background:rgba(169,30,57,.08) !important;
+  color:#851b31 !important;
+}
+
+.chapter-btn.active{
+  background:linear-gradient(135deg,#b12443,#8a1830) !important;
+  color:#fff !important;
+  box-shadow:0 8px 18px rgba(127,18,41,.22) !important;
+}
+
+.chapter-btn.active::before{
+  background:rgba(255,255,255,.17);
+  color:#fff;
+}
+
+.chapter-btn .chapter-number{
+  display:none !important;
+}
+
+/* =========================
+   CAPA DA PRIMEIRA PÁGINA
+========================= */
+#p1.hero{
+  background:
+    radial-gradient(circle at 80% 18%,rgba(255,255,255,.13),transparent 25%),
+    linear-gradient(135deg,#6e1025,#a61e3c 48%,#741229) !important;
+  color:#fff !important;
+  border-radius:18px !important;
+  justify-content:center !important;
+}
+
+#p1.hero::before{
+  content:"QUERIA CONTAR PARA VOCÊ ANTES";
   position:absolute;
   top:42px;
   left:50%;
   transform:translateX(-50%);
-  width:max-content;
-  max-width:85%;
   font-family:'Playfair Display',serif;
-  letter-spacing:.18em;
-  text-transform:uppercase;
+  letter-spacing:.16em;
   font-size:.72rem;
   color:rgba(255,255,255,.72);
+  width:max-content;
+  max-width:80%;
+}
+
+#p1.hero::after{
+  content:"♡";
+  position:absolute;
+  right:9%;
+  bottom:8%;
+  color:rgba(255,255,255,.28);
+  font-size:6rem;
+  font-family:'Playfair Display',serif;
+}
+
+#p1.hero h1,
+#p1.hero h2,
+#p1.hero .frase,
+#p1.hero .data,
+#p1.hero #contador{
+  color:#fff !important;
 }
 
 #p1 .hero-cover-content{
+  width:min(700px,92%);
+  padding:54px 28px 28px;
   position:relative;
-  z-index:1;
-  width:min(680px,90%);
-  padding:38px 28px;
+  z-index:2;
 }
 
 #p1.hero h1{
-  font-size:clamp(3.2rem,7vw,5.8rem);
-  margin-bottom:18px;
-  text-shadow:0 6px 20px rgba(0,0,0,.22);
-}
-
-#p1.hero .frase{
-  font-size:clamp(1.05rem,2vw,1.3rem);
-  margin:auto;
+  font-family:'Dancing Script',cursive !important;
+  font-size:clamp(4rem,8vw,7rem) !important;
+  margin-bottom:18px !important;
 }
 
 .cover-counter{
-  margin:30px auto 0 !important;
-  max-width:420px !important;
   background:rgba(255,255,255,.10) !important;
-  border:1px solid rgba(255,255,255,.24);
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 14px 35px rgba(0,0,0,.16);
 }
 
-/* Capítulos ao lado */
-.chapter-nav{
-  position:absolute;
-  right:0;
-  top:50%;
-  transform:translateY(-50%);
-  width:150px;
-  max-height:82%;
-  overflow-y:auto;
-  padding:8px 0 8px 16px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  z-index:30;
+/* =========================
+   LISTA DA PÁGINA 4
+========================= */
+#p4{
+  justify-content:flex-start !important;
+  padding-top:46px !important;
 }
 
-.chapter-nav-title{
-  font-family:'Playfair Display',serif;
-  font-size:.82rem;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.8);
-  margin:0 0 5px 8px;
-}
-
-.chapter-btn{
+.motivos-titulo{
+  position:sticky;
+  top:-46px;
   width:100%;
+  padding:10px 0 20px;
+  background:linear-gradient(to bottom,#fffaf7 78%,transparent);
+  z-index:10;
+}
+
+.motivos-lista{
+  width:min(850px,100%);
+  list-style:none;
+  display:grid;
+  gap:13px;
+  padding:0 0 35px !important;
+  margin:0 auto !important;
+}
+
+.motivos-lista li{
+  position:relative;
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  padding:18px 68px 18px 82px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(157,31,50,.17);
+  border-radius:18px;
+  box-shadow:0 8px 20px rgba(125,36,40,.08);
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1rem,2vw,1.32rem);
   text-align:left;
-  margin:0;
-  padding:11px 12px;
-  border-radius:12px 0 0 12px;
-  background:rgba(255,255,255,.14);
-  color:#fff;
-  border:1px solid rgba(255,255,255,.16);
-  border-right:0;
-  box-shadow:none;
-  font-size:.78rem;
-  line-height:1.25;
 }
 
-.chapter-btn:hover,
-.chapter-btn.active{
-  background:rgba(255,255,255,.94);
-  color:#8c1d3d;
-  transform:translateX(-4px);
+.motivos-lista li::before{
+  content:"♥";
+  position:absolute;
+  left:20px;
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#fff3f1;
+  color:#a41f38;
+  border:1px solid rgba(164,31,56,.18);
 }
 
-.chapter-btn .chapter-number{
-  display:block;
-  font-size:.64rem;
+.motivos-lista li::after{
+  content:"🎀";
+  position:absolute;
+  right:20px;
+  font-size:1.35rem;
   opacity:.72;
-  margin-bottom:3px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
 }
 
-/* O antigo controle inferior não é mais necessário */
-.nav-controls{
-  display:none !important;
+/* Cartões e conteúdos internos no papel */
+.memory-section,.text-card,.memory-form{
+  background:rgba(255,255,255,.60) !important;
+  border-color:rgba(145,43,54,.16) !important;
+  color:#4b292b !important;
 }
 
-/* Tema e música continuam sempre no topo */
-.theme-btn{z-index:5000;}
-.music-dock{z-index:4900;}
+.photo-card{
+  border-color:rgba(145,43,54,.14) !important;
+  background:#fff8f6 !important;
+}
 
-@media(max-width:760px){
+.photo-caption,.text-card p,.text-card h3,.text-card small{
+  color:#4b292b !important;
+}
+
+/* Controles de mídia e texto */
+.add-btn,button:not(.chapter-btn):not(.theme-btn):not(.music-toggle):not(.lightbox-close):not(.cover-read-btn){
+  background:linear-gradient(135deg,#a91e39,#7d1228);
+  color:#fff;
+}
+
+/* Tema escuro continua respeitado */
+body.estrelado .pages-wrapper{
+  background:linear-gradient(135deg,#090b1d,#111735) !important;
+}
+body.estrelado .page,
+body.estrelado .page p,
+body.estrelado .page li{
+  color:#f5eef5 !important;
+}
+body.estrelado .chapter-nav{
+  background:linear-gradient(135deg,#10142c,#1b2044) !important;
+}
+body.estrelado .chapter-cover-title,
+body.estrelado .chapter-btn{
+  color:#f7edf5 !important;
+}
+body.estrelado .chapter-cover-subtitle{color:#d6c5d1 !important;}
+
+/* Tema e música sempre acima */
+.theme-btn{
+  top:16px !important;
+  right:18px !important;
+  z-index:9000 !important;
+}
+.music-dock{
+  top:72px !important;
+  right:18px !important;
+  z-index:8900 !important;
+}
+
+/* Antiga navegação inferior */
+.nav-controls{display:none !important;}
+
+/* MOBILE */
+@media(max-width:900px){
   .book-container{
-    width:calc(100% - 18px);
-    height:calc(100dvh - 92px);
-    padding-right:0;
-    padding-bottom:74px;
+    width:calc(100% - 16px) !important;
+    height:calc(100dvh - 26px) !important;
+    max-height:none !important;
+    padding:0 0 70px !important;
+  }
+
+  .pages-wrapper{
+    border-radius:20px !important;
+    border-width:4px !important;
   }
 
   .chapter-nav{
-    top:auto;
-    bottom:0;
-    right:0;
-    left:0;
-    transform:none;
-    width:100%;
-    max-height:none;
-    height:64px;
-    overflow-x:auto;
-    overflow-y:hidden;
-    flex-direction:row;
-    align-items:center;
-    padding:6px 2px;
-    gap:7px;
+    top:auto !important;
+    bottom:0 !important;
+    left:0 !important;
+    width:100% !important;
+    height:64px !important;
+    padding:5px 8px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    border-radius:17px !important;
+    gap:6px !important;
   }
 
-  .chapter-nav-title{display:none;}
+  .chapter-cover{display:none !important;}
 
   .chapter-btn{
-    min-width:74px;
-    height:52px;
-    padding:7px 9px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,.16);
-    text-align:center;
-    flex:0 0 auto;
+    min-width:54px !important;
+    width:54px !important;
+    height:52px !important;
+    padding:0 !important;
+    justify-content:center !important;
+    flex:0 0 54px !important;
+    font-size:0 !important;
   }
 
-  .chapter-btn .chapter-number{
+  .chapter-btn::before{
+    width:38px;
+    height:38px;
+    font-size:1.05rem;
+  }
+
+  .pages-wrapper::after{display:none;}
+
+  .page{
+    padding:42px 18px 28px !important;
+  }
+
+  #p1.hero h1{
+    font-size:clamp(3.3rem,16vw,5rem) !important;
+  }
+
+  #p1.hero::before{
+    top:25px;
     font-size:.58rem;
-    margin-bottom:2px;
+    letter-spacing:.10em;
   }
 
-  #p1.hero::after{
-    top:30px;
-    font-size:.6rem;
+  #p4{
+    padding-top:24px !important;
   }
 
-  #p1 .hero-cover-content{
-    padding:25px 15px;
+  .motivos-titulo{
+    top:-24px;
+    padding:10px 0 16px;
+  }
+
+  .motivos-lista li{
+    padding:16px 54px 16px 62px;
+    min-height:62px;
+  }
+
+  .motivos-lista li::before{
+    left:13px;
+    width:34px;
+    height:34px;
+  }
+
+  .motivos-lista li::after{
+    right:13px;
+    font-size:1rem;
   }
 }
 </style>
@@ -300,16 +604,22 @@
 <div class="book-container">
 
 
-<!-- NAVEGADOR DE CAPÍTULOS v1 -->
+
+<!-- NAVEGADOR DE CAPÍTULOS v2 -->
 <nav class="chapter-nav" aria-label="Capítulos do livro">
-  <div class="chapter-nav-title">Capítulos</div>
-  <button class="chapter-btn active" data-page="1" onclick="irParaCapitulo(1)"><span class="chapter-number">Capa</span>Minha vida</button>
-  <button class="chapter-btn" data-page="2" onclick="irParaCapitulo(2)"><span class="chapter-number">Capítulo 1</span>Carta</button>
-  <button class="chapter-btn" data-page="3" onclick="irParaCapitulo(3)"><span class="chapter-number">Capítulo 2</span>Nosso começo</button>
-  <button class="chapter-btn" data-page="4" onclick="irParaCapitulo(4)"><span class="chapter-number">Capítulo 3</span>O que amo</button>
-  <button class="chapter-btn" data-page="5" onclick="irParaCapitulo(5)"><span class="chapter-number">Capítulo 4</span>Momentos</button>
-  <button class="chapter-btn" data-page="6" onclick="irParaCapitulo(6)"><span class="chapter-number">Capítulo 5</span>Nossos textos</button>
-  <button class="chapter-btn" data-page="7" onclick="irParaCapitulo(7)"><span class="chapter-number">Final</span>Para sempre</button>
+  <div class="chapter-cover">
+    <div class="chapter-cover-title">Queria contar<br>para você antes</div>
+    <div class="chapter-cover-subtitle">Um livro feito para você.</div>
+    <button class="cover-read-btn" type="button" onclick="irParaCapitulo(1)">Leia ♡</button>
+  </div>
+
+  <button class="chapter-btn active" data-page="1" data-icon="⌂" onclick="irParaCapitulo(1)"><span class="chapter-number">1</span>Início</button>
+  <button class="chapter-btn" data-page="2" data-icon="✉" onclick="irParaCapitulo(2)"><span class="chapter-number">2</span>Carta para você</button>
+  <button class="chapter-btn" data-page="3" data-icon="☷" onclick="irParaCapitulo(3)"><span class="chapter-number">3</span>Nosso comecinho</button>
+  <button class="chapter-btn" data-page="4" data-icon="♡" onclick="irParaCapitulo(4)"><span class="chapter-number">4</span>Coisas que amo</button>
+  <button class="chapter-btn" data-page="5" data-icon="▣" onclick="irParaCapitulo(5)"><span class="chapter-number">5</span>Momentos</button>
+  <button class="chapter-btn" data-page="6" data-icon="✎" onclick="irParaCapitulo(6)"><span class="chapter-number">6</span>Nossos textos</button>
+  <button class="chapter-btn" data-page="7" data-icon="♡" onclick="irParaCapitulo(7)"><span class="chapter-number">7</span>Para sempre</button>
 </nav>
 
 <div class="pages-wrapper">
@@ -3188,14 +3498,12 @@ function irParaCapitulo(destino){
   atualizarCapitulos();
   nova.scrollTop=0;
 }
-document.addEventListener('DOMContentLoaded',()=>{
+atualizarCapitulos();
+const originalMudarPaginaLivro=mudarPagina;
+window.mudarPagina=function(direcao){
+  originalMudarPaginaLivro(direcao);
   atualizarCapitulos();
-  const originalMudarPagina=mudarPagina;
-  window.mudarPagina=function(direcao){
-    originalMudarPagina(direcao);
-    atualizarCapitulos();
-  };
-});
+};
 </script>
 </body>
 </html>
