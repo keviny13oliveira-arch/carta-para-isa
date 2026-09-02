@@ -2186,6 +2186,10 @@ function abrirCarta(){
         0;
 
 
+    const scrollInicial =
+        window.scrollY;
+
+
     function escreverCarta(){
 
         if(
@@ -2197,11 +2201,19 @@ function abrirCarta(){
             .getElementById(
                 'carta'
             )
-            .innerHTML +=
+            .textContent +=
                 poema.charAt(idx);
 
 
             idx++;
+
+
+            if(window.scrollY !== scrollInicial){
+                window.scrollTo({
+                    top:scrollInicial,
+                    behavior:'auto'
+                });
+            }
 
 
             setTimeout(
@@ -2238,6 +2250,10 @@ function abrirHistoria(){
         0;
 
 
+    const scrollInicialHistoria =
+        window.scrollY;
+
+
     function digitarHistoria(){
 
         if(
@@ -2249,11 +2265,19 @@ function abrirHistoria(){
             .getElementById(
                 'historiaTexto'
             )
-            .innerHTML +=
+            .textContent +=
                 historiaCompleta.charAt(i);
 
 
             i++;
+
+
+            if(window.scrollY !== scrollInicialHistoria){
+                window.scrollTo({
+                    top:scrollInicialHistoria,
+                    behavior:'auto'
+                });
+            }
 
 
             setTimeout(
