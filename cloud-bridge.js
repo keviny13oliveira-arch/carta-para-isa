@@ -16,12 +16,33 @@
     (items || []).forEach(function (item) {
       const card = document.createElement('article');
       card.className = 'text-card';
+      const titleButton = document.createElement('button');
+      titleButton.type = 'button';
+      titleButton.className = 'text-card-title';
+
       const h = document.createElement('h3');
       h.textContent = item.title || 'Uma lembrança';
+
+      const toggleIcon = document.createElement('span');
+      toggleIcon.className = 'text-toggle-icon';
+      toggleIcon.textContent = '⌄';
+
+      titleButton.append(h, toggleIcon);
+
+      const content = document.createElement('div');
+      content.className = 'text-card-content';
+
       const p = document.createElement('p');
       p.textContent = item.content || '';
+
       const small = document.createElement('small');
       small.textContent = item.created_at ? new Date(item.created_at).toLocaleDateString('pt-BR') : '';
+
+      content.append(p, small);
+
+      titleButton.onclick = function () {
+        card.classList.toggle('open');
+      };
 
       const actions = document.createElement('div');
       actions.className = 'text-card-actions';
@@ -36,7 +57,7 @@
       remove.textContent = '🗑️ Excluir';
       remove.onclick = function () { window.excluirTexto(item); };
       actions.append(edit, remove);
-      card.append(h, p, small, actions);
+      card.append(titleButton, content, actions);
       list.appendChild(card);
     });
     if (empty) empty.style.display = (items && items.length) ? 'none' : 'block';
