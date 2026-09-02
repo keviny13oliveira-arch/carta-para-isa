@@ -1314,6 +1314,35 @@ body:not(.estrelado) #p4 h2{
         ) !important;
 }
 
+
+/* CORREÇÃO VISUAL DEFINITIVA: PAPEL BRANCO */
+body:not(.estrelado) .pages-wrapper,
+body:not(.estrelado) .pages-wrapper::after{
+    background-color:#ffffff !important;
+}
+
+body:not(.estrelado) .pages-wrapper{
+    background:#ffffff !important;
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(185,35,61,.035) 0,
+            rgba(185,35,61,.035) 1px,
+            transparent 1px,
+            transparent 34px
+        ) !important;
+}
+
+body:not(.estrelado) .page,
+body:not(.estrelado) #p4{
+    background-color:transparent !important;
+    background-image:none !important;
+}
+
+body:not(.estrelado) .pages-wrapper::after{
+    background:rgba(185,35,61,.12) !important;
+}
+
 </style>
 </head>
 
