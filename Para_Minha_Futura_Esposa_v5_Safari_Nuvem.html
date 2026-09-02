@@ -1431,6 +1431,45 @@ body.estrelado .memories-head h2{
     color:#ffffff !important;
 }
 
+
+/* TEXTOS RECOLHÍVEIS v1 */
+.text-card-content{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid rgba(185,35,61,.14);
+}
+
+.text-card-content.expanded{
+    display:block;
+}
+
+.text-card-content p{
+    margin:0;
+    white-space:pre-line;
+    line-height:1.75;
+}
+
+.text-card-actions{
+    flex-wrap:wrap;
+}
+
+.show-text-btn{
+    background:rgba(255,255,255,.94);
+    color:#7b2341;
+}
+
+@media(max-width:520px){
+    .text-card-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .text-card-actions .show-text-btn{
+        grid-column:1 / -1;
+    }
+}
+
 </style>
 </head>
 
@@ -1621,6 +1660,7 @@ body.estrelado .memories-head h2{
         <li>O esforço que você faz por mim</li>
         <li>O conforto que você me leva</li>
         <li>A paz que existe contigo</li>
+        <li>Seus lindos lábios</li>
         <li>O fato de você ser meu presente e eternamente meu sonho e futuro</li>
     </ul>
 
@@ -3723,25 +3763,20 @@ function carregarTextos(){
             'textList'
         );
 
-
     const empty =
         document.getElementById(
             'textEmpty'
         );
 
-
     if(!list){
         return;
     }
 
-
     const itens =
         obterTextos();
 
-
     list.innerHTML =
         '';
-
 
     itens.forEach(
         item=>{
@@ -3751,66 +3786,92 @@ function carregarTextos(){
                     'article'
                 );
 
-
             card.className =
                 'text-card';
-
 
             const h =
                 document.createElement(
                     'h3'
                 );
 
-
             h.textContent =
                 item.titulo ||
                 'Uma lembrança';
-
-
-            const p =
-                document.createElement(
-                    'p'
-                );
-
-
-            p.textContent =
-                item.conteudo;
-
 
             const small =
                 document.createElement(
                     'small'
                 );
 
-
             small.textContent =
                 item.data ||
                 '';
 
+            const content =
+                document.createElement(
+                    'div'
+                );
+
+            content.className =
+                'text-card-content';
+
+            const p =
+                document.createElement(
+                    'p'
+                );
+
+            p.textContent =
+                item.conteudo;
+
+            content.appendChild(p);
 
             const actions =
                 document.createElement(
                     'div'
                 );
 
-
             actions.className =
                 'text-card-actions';
 
+            const exibir =
+                document.createElement(
+                    'button'
+                );
+
+            exibir.type =
+                'button';
+
+            exibir.className =
+                'show-text-btn';
+
+            exibir.textContent =
+                '📖 Exibir';
+
+            exibir.onclick =
+                ()=>{
+
+                    const aberto =
+                        content.classList.toggle(
+                            'expanded'
+                        );
+
+                    exibir.textContent =
+                        aberto
+                        ? '📕 Exibir menos'
+                        : '📖 Exibir';
+
+                };
 
             const editar =
                 document.createElement(
                     'button'
                 );
 
-
             editar.type =
                 'button';
 
-
             editar.textContent =
                 '✏️ Editar';
-
 
             editar.onclick =
                 ()=>{
@@ -3821,24 +3882,19 @@ function carregarTextos(){
 
                 };
 
-
             const excluir =
                 document.createElement(
                     'button'
                 );
 
-
             excluir.type =
                 'button';
-
 
             excluir.className =
                 'delete-photo-btn';
 
-
             excluir.textContent =
                 '🗑️ Excluir';
-
 
             excluir.onclick =
                 ()=>{
@@ -3849,20 +3905,18 @@ function carregarTextos(){
 
                 };
 
-
             actions.append(
+                exibir,
                 editar,
                 excluir
             );
 
-
             card.append(
                 h,
-                p,
                 small,
+                content,
                 actions
             );
-
 
             list.appendChild(
                 card
@@ -3870,7 +3924,6 @@ function carregarTextos(){
 
         }
     );
-
 
     if(empty){
 
