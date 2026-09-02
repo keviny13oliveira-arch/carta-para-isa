@@ -1126,6 +1126,26 @@ h2{
 
 }
 
+
+/* CORREÇÃO DE LEITURA SEM BLOQUEAR A ROLAGEM */
+#p2,
+#p3{
+    overflow-anchor:none;
+    align-content:start;
+}
+
+#p2 h2,
+#p3 h2,
+#p2 .story-box,
+#p3 .story-box{
+    overflow-anchor:none;
+}
+
+#carta,
+#historiaTexto{
+    overflow-anchor:none;
+    white-space:pre-wrap;
+}
 </style>
 
 <script src="supabase-memories.js"></script>
@@ -2186,10 +2206,6 @@ function abrirCarta(){
         0;
 
 
-    const scrollInicial =
-        window.scrollY;
-
-
     function escreverCarta(){
 
         if(
@@ -2206,14 +2222,6 @@ function abrirCarta(){
 
 
             idx++;
-
-
-            if(window.scrollY !== scrollInicial){
-                window.scrollTo({
-                    top:scrollInicial,
-                    behavior:'auto'
-                });
-            }
 
 
             setTimeout(
@@ -2250,10 +2258,6 @@ function abrirHistoria(){
         0;
 
 
-    const scrollInicialHistoria =
-        window.scrollY;
-
-
     function digitarHistoria(){
 
         if(
@@ -2270,14 +2274,6 @@ function abrirHistoria(){
 
 
             i++;
-
-
-            if(window.scrollY !== scrollInicialHistoria){
-                window.scrollTo({
-                    top:scrollInicialHistoria,
-                    behavior:'auto'
-                });
-            }
 
 
             setTimeout(
