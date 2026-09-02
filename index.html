@@ -11,7 +11,7 @@
     (async function () {
       const pagina = 'Para_Minha_Futura_Esposa_v5_Safari_Nuvem.html';
       try {
-        const response = await fetch(pagina + '?v=7');
+        const response = await fetch(pagina + '?v=8');
         if (!response.ok) throw new Error('Falha ao carregar a carta');
         let html = await response.text();
         const scripts = '<script src="supabase-memories.js"></' + 'script><script src="cloud-bridge.js"></' + 'script>';
